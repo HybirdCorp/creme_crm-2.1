@@ -470,7 +470,7 @@ FORMS_RELATION_FIELDS = True
 URLIZE_TARGET_BLANK = False
 
 # URL used in the GUI to indicate the repository address
-REPOSITORY = 'https://bitbucket.org/hybird/creme_crm/src/'
+REPOSITORY = 'https://bitbucket.org/hybird/creme_crm-2.1/src/'
 
 # GUI [END]#####################################################################
 
