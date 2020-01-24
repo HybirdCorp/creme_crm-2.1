@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -32,8 +32,12 @@ from django.utils.translation import gettext_lazy as _, gettext
 from ..constants import MODELBRICK_ID
 from ..core.entity_cell import EntityCellRegularField
 from ..core.sorter import cell_sorter_registry
-from ..models import (Relation, RelationBrickItem, CremeEntity,
-        InstanceBrickConfigItem, CustomBrickConfigItem, BrickState)
+from ..models import (
+    CremeEntity,
+    Relation,
+    RelationBrickItem, InstanceBrickConfigItem, CustomBrickConfigItem,
+    BrickState,
+)
 from ..utils.meta import OrderedField
 
 logger = logging.getLogger(__name__)
@@ -633,8 +637,13 @@ class _BrickRegistry:
         setdefault = self._brick_classes.setdefault
 
         for brick_cls in brick_classes:
-            if setdefault(brick_cls.id_, brick_cls) is not brick_cls:
-                raise self.RegistrationError("Duplicated brick's id: {}".format(brick_cls.id_))
+            brick_id = brick_cls.id_
+
+            if not brick_id:
+                raise self.RegistrationError("Brick class with empty id_: {}".format(brick_cls))
+
+            if setdefault(brick_id, brick_cls) is not brick_cls:
+                raise self.RegistrationError("Duplicated brick's id: {}".format(brick_id))
 
         return self
 
@@ -642,8 +651,13 @@ class _BrickRegistry:
         setdefault = self._instance_brick_classes.setdefault
 
         for brick_cls in brick_classes:
-            if setdefault(brick_cls.id_, brick_cls) is not brick_cls:
-                raise self.RegistrationError("Duplicated brick's id: {}".format(brick_cls.id_))
+            brick_id = brick_cls.id_
+
+            if not brick_id:
+                raise self.RegistrationError("Brick class with empty id_: {}".format(brick_cls))
+
+            if setdefault(brick_id, brick_cls) is not brick_cls:
+                raise self.RegistrationError("Duplicated brick's id: {}".format(brick_id))
 
         return self
 
