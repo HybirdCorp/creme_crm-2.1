@@ -3,8 +3,11 @@
 try:
     from ..base import CremeTestCase
 
-    from creme.creme_core.core.sandbox import (SandboxType,
-            _SandboxTypeRegistry, sandbox_type_registry)
+    from creme.creme_core.core.sandbox import (
+        SandboxType,
+        _SandboxTypeRegistry,
+        sandbox_type_registry,
+    )
     from creme.creme_core.models import Sandbox
 except Exception as e:
     print('Error in <{}>: {}'.format(__name__, e))
@@ -41,8 +44,12 @@ class SandboxTestCase(CremeTestCase):
 
         registry.register(TestSandboxType2_2)
 
-        with self.assertRaises(_SandboxTypeRegistry.Error):
+        with self.assertRaises(_SandboxTypeRegistry.Error) as cm:
             registry.register(TestSandboxType2_3)
+
+        self.assertEqual('Duplicated sandbox type id: {}'.format(TestSandboxType2_3.id),
+                         str(cm.exception)
+                        )
 
         sandbox1 = Sandbox(type_id=TestSandboxType2_2.id)
         self.assertIsInstance(registry.get(sandbox1), TestSandboxType2_2)
@@ -62,6 +69,21 @@ class SandboxTestCase(CremeTestCase):
                                  TestSandboxType2_4.id
                             ),
                          ],
+                        )
+
+    def test_registry03(self):
+        "Empty ID."
+        class TestSandboxType(SandboxType):
+            # id = SandboxType.generate_id('creme_core', 'test')  NOPE
+            verbose_name = 'Test sandbox'
+
+        registry = _SandboxTypeRegistry()
+
+        with self.assertRaises(_SandboxTypeRegistry.Error) as cm:
+            registry.register(TestSandboxType)
+
+        self.assertEqual('SandBox class with empty id: {}'.format(TestSandboxType),
+                         str(cm.exception)
                         )
 
     def test_sandbox_data(self):
