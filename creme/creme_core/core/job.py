@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2016-2019  Hybird
+#    Copyright (C) 2016-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -37,7 +37,6 @@ from ..utils.dates import make_aware_dt
 from ..utils.imports import import_apps_sub_modules
 from ..utils.system import python_subprocess, enable_exit_handler
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -71,8 +70,13 @@ class _JobTypeRegistry:
             logger.critical('Unknown JobType: %s', job_type_id)
 
     def register(self, job_type):
-        if self._job_types.setdefault(job_type.id, job_type) is not job_type:
-            raise _JobTypeRegistry.Error("Duplicated job type id: {}".format(job_type.id))
+        jtype_id = job_type.id
+
+        if not jtype_id:
+            raise _JobTypeRegistry.Error('Empty JobType id: {}'.format(job_type))
+
+        if self._job_types.setdefault(jtype_id, job_type) is not job_type:
+            raise _JobTypeRegistry.Error("Duplicated job type id: {}".format(jtype_id))
 
     def autodiscover(self):
         register = self.register
