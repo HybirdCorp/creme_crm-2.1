@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -34,7 +34,7 @@ FIRST_REMINDER = 1
 
 
 class Reminder:
-    id    = None  # Overload with an unicode object ; use generate_id()
+    id    = None  # Overload with a str object ; use generate_id()
     model = None  # Overload with a CremeModel
 
     def __init__(self):
@@ -45,15 +45,15 @@ class Reminder:
         return 'reminder_{}-{}'.format(app_name, name)
 
     def get_emails(self, object):
-        adddresses = []
+        addresses = []
         default_addr = getattr(settings, 'DEFAULT_USER_EMAIL', None)
 
         if default_addr:
-            adddresses.append(default_addr)
+            addresses.append(default_addr)
         else:
             logger.critical('Reminder: the setting DEFAULT_USER_EMAIL has not been filled ; no email will be sent.')
 
-        return adddresses
+        return addresses
 
     def generate_email_subject(self, object):
         pass
@@ -139,8 +139,16 @@ class ReminderRegistry:
         reminders = self._reminders
         reminder_id = reminder.id
 
+        if not reminder_id:
+            raise self.RegistrationError(
+                "Reminder class with empty id: {}".format(reminder),
+            )
+
         if reminder_id in reminders:
-            raise self.RegistrationError("Duplicated reminder's id or reminder registered twice: {}".format(reminder_id))
+            raise self.RegistrationError(
+                "Duplicated reminder's id or reminder registered twice: {}".format(
+                    reminder_id,
+            ))
 
         reminders[reminder_id] = reminder()
 
