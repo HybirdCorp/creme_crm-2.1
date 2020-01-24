@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -75,8 +75,19 @@ class ButtonsRegistry:
         setdefault = self._button_classes.setdefault
 
         for button_cls in button_classes:
-            if setdefault(button_cls.id_, button_cls) is not button_cls:
-                raise self.RegistrationError("Duplicated button's ID (or button registered twice) : {}".format(button_cls.id_))
+            button_id = button_cls.id_
+
+            if not button_id:
+                raise self.RegistrationError(
+                    'Button class with empty id_: {}'.format(button_cls)
+                )
+
+            if setdefault(button_id, button_cls) is not button_cls:
+                raise self.RegistrationError(
+                    "Duplicated button's ID (or button registered twice) : {}".format(
+                        button_id,
+                    )
+                )
 
     def get_button(self, button_id):
         cls = self._button_classes.get(button_id)

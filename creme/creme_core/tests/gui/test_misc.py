@@ -17,13 +17,19 @@ try:
     from ..base import CremeTestCase
     from ..fake_constants import FAKE_PERCENT_UNIT, FAKE_DISCOUNT_UNIT
     from ..fake_forms import FakeContactQuickForm, FakeOrganisationQuickForm
-    from ..fake_models import (FakeContact, FakeOrganisation, FakePosition,
-            FakeImage, FakeImageCategory, FakeEmailCampaign, FakeMailingList,
-            FakeInvoice, FakeInvoiceLine)
+    from ..fake_models import (
+        FakeContact, FakeOrganisation, FakePosition,
+        FakeImage, FakeImageCategory,
+        FakeEmailCampaign, FakeMailingList,
+        FakeInvoice, FakeInvoiceLine,
+    )
     from creme.creme_core.auth.entity_credentials import EntityCredentials
     from creme.creme_core.gui.button_menu import Button, ButtonsRegistry
-    from creme.creme_core.gui.field_printers import (_FieldPrintersRegistry,
-            FKPrinter, simple_print_html)
+    from creme.creme_core.gui.field_printers import (
+        _FieldPrintersRegistry,
+        FKPrinter,
+        simple_print_html,
+    )
     from creme.creme_core.forms import CremeModelForm  # CremeModelWithUserForm
     from creme.creme_core.gui.icons import Icon, IconRegistry
     from creme.creme_core.gui.last_viewed import LastViewedItem
@@ -560,7 +566,7 @@ class GuiTestCase(CremeTestCase):
         self.assertIn('icecream/images/organisation_22', icon3.url)
         self.assertEqual('Test Organisation',           icon3.label)
 
-    def test_button_registry(self):
+    def test_button_registry01(self):
         class TestButton1(Button):
             id_ = Button.generate_id('creme_core', 'test_button_registry_1')
 
@@ -611,6 +617,41 @@ class GuiTestCase(CremeTestCase):
         button_item = all_button_items[0]
         self.assertIsInstance(button_item[1], Button)
         self.assertEqual(button_item[0], button_item[1].id_)
+
+    def test_button_registry02(self):
+        "Duplicated ID."
+        class TestButton1(Button):
+            id_ = Button.generate_id('creme_core', 'test_button_registry_1')
+
+        class TestButton2(TestButton1):
+            # id_ = Button.generate_id('creme_core', 'test_button_registry_2') NOPE
+            pass
+
+        registry = ButtonsRegistry()
+
+        with self.assertRaises(ButtonsRegistry.RegistrationError) as cm:
+            registry.register(TestButton1, TestButton2)
+
+        self.assertEqual(
+            "Duplicated button's ID (or button registered twice) : {}".format(TestButton1.id_),
+            str(cm.exception)
+        )
+
+    def test_button_registry03(self):
+        "Empty ID."
+        class TestButton(Button):
+            # id_ = Button.generate_id('creme_core', 'test_button_registry') # NOPE
+            pass
+
+        registry = ButtonsRegistry()
+
+        with self.assertRaises(ButtonsRegistry.RegistrationError) as cm:
+            registry.register(TestButton)
+
+        self.assertEqual(
+            'Button class with empty id_: {}'.format(TestButton),
+            str(cm.exception)
+        )
 
     def test_quickforms_registry01(self):
         "Registration."
