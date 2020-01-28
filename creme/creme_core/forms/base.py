@@ -82,8 +82,10 @@ class FieldBlocksGroup:
             field_names = block.field_names
 
             if field_names == '*':  # Wildcard
+                if wildcard_cat:
+                    raise ValueError('Only one wildcard is allowed: {}'.format(type(form)))
+
                 blocks_data[cat] = block.name
-                assert wildcard_cat is None, 'Only one wildcard is allowed: {}'.format(form)
                 wildcard_cat = cat
             else:
                 field_set |= {*field_names}
@@ -151,22 +153,39 @@ class FieldBlockManager:
 
             if field_block is not None:
                 field_block.name = name
-                field_block.field_names.extend(field_names)
+
+                if isinstance(field_block.field_names, str):
+                    assert field_block.field_names == '*'
+
+                    # TODO: possibility to have ('fieldX', 'fieldY', '*', 'fieldZ') ??
+                    raise ValueError(
+                        'You cannot extend a wildcard (see the form-block with category "{}")'.format(cat)
+                    )
+                else:
+                    if isinstance(field_names, str):
+                        assert field_names == '*'
+
+                        # TODO: idem
+                        raise ValueError(
+                            'You cannot extend with a wildcard (see the form-block with category "{}")'.format(cat)
+                        )
+                    else:
+                        field_block.field_names.extend(field_names)
             else:
                 to_add.append((cat, _FieldBlock(name, field_names)))  # Can't add during iteration
 
         for cat, field_block in to_add:
             merged_blocks[cat] = field_block
 
-        fdm = FieldBlockManager()
-        fdm.__blocks = merged_blocks  # Yerk....
+        fbm = FieldBlockManager()
+        fbm.__blocks = merged_blocks  # Yerk....
 
-        return fdm
+        return fbm
 
     def build(self, form):
         """You should not call this directly ; see CremeForm/CremeModelForm
         get_blocks() method.
-        @param form: An instance of django.forms.Form.
+        @param form: An instance of <django.forms.Form>.
         @return An instance of FieldBlocksGroup.
         """
         return FieldBlocksGroup(form, self.__blocks.items())
@@ -223,8 +242,8 @@ class CremeForm(forms.Form, HookableForm):
     def __init__(self, user, *args, **kwargs):
         """Constructor.
         @param user: The user who sends the request (i order to check the permissions)
-        @param args: see django.forms.Form.
-        @param kwargs: see django.forms.Form.
+        @param args: see <django.forms.Form>.
+        @param kwargs: see <django.forms.Form>.
         """
         super().__init__(*args, **kwargs)
         self.user = user
@@ -235,7 +254,7 @@ class CremeForm(forms.Form, HookableForm):
         self._creme_post_init()
 
     def clean(self, *args, **kwargs):
-        res = super().clean(*args, **kwargs)
+        res = super().clean()
         self._creme_post_clean()
         return res
 
@@ -255,8 +274,8 @@ class CremeModelForm(forms.ModelForm, HookableForm):
     def __init__(self, user, *args, **kwargs):
         """Constructor.
         @param user: The user who sends the request (in order to check the permissions).
-        @param args: see django.forms.ModelForm.
-        @param kwargs: see django.forms.ModelForm.
+        @param args: see <django.forms.ModelForm>.
+        @param kwargs: see <django.forms.ModelForm>.
         """
         super().__init__(*args, **kwargs)
         self.user = user
@@ -270,7 +289,7 @@ class CremeModelForm(forms.ModelForm, HookableForm):
         self._creme_post_init()
 
     def clean(self, *args, **kwargs):
-        res = super().clean(*args, **kwargs)
+        res = super().clean()
         self._creme_post_clean()
         return res
 
@@ -337,7 +356,7 @@ class CremeEntityForm(CremeModelForm):
     }
 
     # blocks = CremeModelWithUserForm.blocks.new(
-    blocks=CremeModelForm.blocks.new(
+    blocks = CremeModelForm.blocks.new(
         ('description',   _('Description'),   ('description',)),
         ('properties',    _('Properties'),    ('property_types',)),
         ('relationships', _('Relationships'), ('rtypes_info', 'relation_types', 'semifixed_rtypes')),
