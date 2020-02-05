@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2018  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -233,7 +233,8 @@ class CRUDityRegistry:
         raise KeyError('Backend not found: ' + norm_subject)
 
     def get_default_backend(self, fetcher_name):
-        fetcher = crudity_registry.get_fetcher(fetcher_name)
+        # fetcher = crudity_registry.get_fetcher(fetcher_name)
+        fetcher = self.get_fetcher(fetcher_name)
         if not fetcher:
             raise KeyError('Unknown fetcher "{}"'.format(fetcher_name))
 
