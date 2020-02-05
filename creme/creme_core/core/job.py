@@ -654,7 +654,7 @@ class JobManager:
                                                ' its trials (we forget it): %s', job.job_id,
                                               )
                             else:
-                                heappush(system_jobs, (job.next_wakeup(now_value), job.id, job))
+                                heappush(system_jobs, (job.next_wakeup(now_value), job.job_id, job))
                                 logger.warning('JobManager: deferred job still does not exist: %s', job.job_id)
                         else:
                             self._push_user_job(real_job)
