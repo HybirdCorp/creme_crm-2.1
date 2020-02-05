@@ -1,3 +1,40 @@
+== Version 2.1.1 ==
+
+  UPGRADE NOTE :
+    - You should upgrade the minor version of Django 2.2 (2.2.10 or more) (eg: pip install -U django==2.2.10).
+    - You can upgrade these libraries too: Redis, python-dateutil, pillow.
+
+  Users side :
+  ------------
+    # The settings 'REPOSITORY' points now the stable repository (not trunk any more) ; it affects the "About" page.
+
+  Developers side :
+  -----------------
+    Non breaking changes :
+    ----------------------
+        # A crash in the management of deferred jobs has been fixed.
+        # The checking for empty IDs has been enfore in several registries
+          (it's not marked as a breaking change because it prevents some bugs you would already have fixed) :
+            - Brick
+            - Button
+            - JobType
+            - Reminder
+            - Sandbox
+        # An error 500 with bad data in the field which extracts value for CustomFields has been fixed.
+        # The error when trying to extend a wildcard in form-blocks has been improved.
+        # Some various error messages & doc-strings were fixed.
+        # The output of the command "creme_populate" has been fixed.
+        # In 'creme_core.gui.menu', these 2 staticmethods are now classmethods: URLItem.list_view(), URLItem.creation_view().
+        # The method 'creme_core.models.SearchConfigItem._get_modelfields_choices()' is now a class-method.
+        # Apps:
+            * Creme_config :
+                - The blocks of the Credentials form have been fixed (it worked anyway, but the semantic was broken).
+            * Persons :
+                - The cloning of 'models.Address' is now "model-swappping" friendly.
+            * Crudity:
+                - The method 'registry.CRUDityRegistry.get_default_backend()' is now correct when inheritance is used.
+
+
 == Version 2.1 ==
 
   UPGRADE NOTE :
