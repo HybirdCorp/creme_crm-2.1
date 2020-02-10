@@ -1,5 +1,5 @@
 # FR LOCALISATION OF 'CREME_CORE' APP
-# Copyright (C) 2019 Hybird
+# Copyright (C) 2020 Hybird
 # This file is distributed under the same license as the Creme package.
 #
 # > django-admin.py makemessages -l fr -i "tests/*" -i "templates/creme_core/tests/*"
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Creme-Core 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 14:27+0100\n"
+"POT-Creation-Date: 2020-02-10 21:17+0100\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -177,13 +177,13 @@ msgstr "Fichier XLSX"
 msgid "XLSX file extension introduced by Microsoft Excel 2007."
 msgstr "Extension XLSX introduite par Microsoft Excel 2007."
 
-#: bricks.py:43 forms/base.py:307 forms/base.py:342 forms/mass_import.py:1185
+#: bricks.py:43 forms/base.py:326 forms/base.py:361 forms/mass_import.py:1221
 #: function_fields.py:48 models/creme_property.py:230
 #: templates/creme_core/bricks/properties.html:7
 msgid "Properties"
 msgstr "Propriétés"
 
-#: bricks.py:60 forms/base.py:343 forms/relation.py:37 gui/bricks.py:410
+#: bricks.py:60 forms/base.py:362 forms/relation.py:37 gui/bricks.py:414
 #: models/relation.py:402 templates/creme_core/bricks/relations.html:7
 #: templates/creme_core/forms/widgets/entity-cells.html:83
 msgid "Relationships"
@@ -203,7 +203,7 @@ msgstr "Historique"
 msgid "History of consultation"
 msgstr "Historique de consultation"
 
-#: bricks.py:256 gui/menu.py:522 templates/creme_core/trash.html:4
+#: bricks.py:256 gui/menu.py:524 templates/creme_core/trash.html:4
 #: templates/creme_core/trash.html:8
 msgid "Trash"
 msgstr "Corbeille"
@@ -354,7 +354,7 @@ msgid "«{field}» is «{value}»"
 msgstr "«{field}» vaut «{value}»"
 
 #: core/entity_filter/condition_handler.py:573
-#: core/entity_filter/operators.py:554
+#: core/entity_filter/operators.py:563
 #, python-brace-format
 msgid "«{field}» is between «{start}» and «{end}»"
 msgstr "«{field}» est entre «{start}» et «{end}»"
@@ -449,215 +449,215 @@ msgstr "Sur les propriétés"
 msgid "Current user"
 msgstr "Utilisateur courant"
 
-#: core/entity_filter/operators.py:176
+#: core/entity_filter/operators.py:179
 #, python-brace-format
 msgid "«{enum_value}»"
 msgstr "«{enum_value}»"
 
-#: core/entity_filter/operators.py:179
+#: core/entity_filter/operators.py:182
 #, python-brace-format
 msgid "{first} or {last}"
 msgstr "{first} ou {last}"
 
-#: core/entity_filter/operators.py:253
+#: core/entity_filter/operators.py:256
 msgid "Equals"
 msgstr "Est égal à"
 
-#: core/entity_filter/operators.py:256
+#: core/entity_filter/operators.py:259
 #, python-brace-format
 msgid "«{field}» is {values}"
 msgstr "«{field}» vaut {values}"
 
-#: core/entity_filter/operators.py:304
+#: core/entity_filter/operators.py:307
 msgid "Does not equal"
 msgstr "N'est pas égal à"
 
-#: core/entity_filter/operators.py:305
+#: core/entity_filter/operators.py:308
 #, python-brace-format
 msgid "«{field}» is not {values}"
 msgstr "«{field}» n'est pas {values}"
 
-#: core/entity_filter/operators.py:321
+#: core/entity_filter/operators.py:324
 msgid ">"
 msgstr ">"
 
-#: core/entity_filter/operators.py:322
+#: core/entity_filter/operators.py:325
 #, python-brace-format
 msgid "«{field}» is greater than {values}"
 msgstr "«{field}» est plus grand que {values}"
 
-#: core/entity_filter/operators.py:329
+#: core/entity_filter/operators.py:332
 msgid "≥"
 msgstr "≥"
 
-#: core/entity_filter/operators.py:330
+#: core/entity_filter/operators.py:333
 #, python-brace-format
 msgid "«{field}» is greater than or equal to {values}"
 msgstr "«{field}» est plus grand ou égal à {values}"
 
-#: core/entity_filter/operators.py:337
+#: core/entity_filter/operators.py:340
 msgid "<"
 msgstr "<"
 
-#: core/entity_filter/operators.py:338
+#: core/entity_filter/operators.py:341
 #, python-brace-format
 msgid "«{field}» is less than {values}"
 msgstr "«{field}» est plus petit que {values}"
 
-#: core/entity_filter/operators.py:345
+#: core/entity_filter/operators.py:348
 msgid "≤"
 msgstr "≤"
 
-#: core/entity_filter/operators.py:346
+#: core/entity_filter/operators.py:349
 #, python-brace-format
 msgid "«{field}» is less than or equal to {values}"
 msgstr "«{field}» est plus petit ou égal à {values}"
 
-#: core/entity_filter/operators.py:372
+#: core/entity_filter/operators.py:378
 msgid "Equals (case insensitive)"
 msgstr "Est égal à (Ne respecte pas la casse)"
 
-#: core/entity_filter/operators.py:374
+#: core/entity_filter/operators.py:380
 #, python-brace-format
 msgid "«{field}» is equal to {values} (case insensitive)"
 msgstr "«{field}» est égal à {values} (insensible à la casse)"
 
-#: core/entity_filter/operators.py:384
+#: core/entity_filter/operators.py:393
 msgid "Does not equal (case insensitive)"
 msgstr "N'est pas égal à (Ne respecte pas la casse)"
 
-#: core/entity_filter/operators.py:385
+#: core/entity_filter/operators.py:394
 #, python-brace-format
 msgid "«{field}» is different from {values} (case insensitive)"
 msgstr "«{field}» n'est pas égal à {values} (insensible à la casse)"
 
-#: core/entity_filter/operators.py:391
+#: core/entity_filter/operators.py:400
 msgid "Contains"
 msgstr "Contient"
 
-#: core/entity_filter/operators.py:392
+#: core/entity_filter/operators.py:401
 #, python-brace-format
 msgid "«{field}» contains {values}"
 msgstr "«{field}» contient {values}"
 
-#: core/entity_filter/operators.py:401
+#: core/entity_filter/operators.py:410
 msgid "Does not contain"
 msgstr "Ne contient pas"
 
-#: core/entity_filter/operators.py:402
+#: core/entity_filter/operators.py:411
 #, python-brace-format
 msgid "«{field}» does not contain {values}"
 msgstr "«{field}» ne contient pas {values}"
 
-#: core/entity_filter/operators.py:408
+#: core/entity_filter/operators.py:417
 msgid "Contains (case insensitive)"
 msgstr "Contient (Ne respecte pas la casse)"
 
-#: core/entity_filter/operators.py:409
+#: core/entity_filter/operators.py:418
 #, python-brace-format
 msgid "«{field}» contains {values} (case insensitive)"
 msgstr "«{field}» contient {values} (insensible à la casse)"
 
-#: core/entity_filter/operators.py:416
+#: core/entity_filter/operators.py:425
 msgid "Does not contain (case insensitive)"
 msgstr "Ne contient pas (Ne respecte pas la casse)"
 
-#: core/entity_filter/operators.py:417
+#: core/entity_filter/operators.py:426
 #, python-brace-format
 msgid "«{field}» does not contain {values} (case insensitive)"
 msgstr "«{field}» ne contient pas {values} (insensible à la casse)"
 
-#: core/entity_filter/operators.py:423
+#: core/entity_filter/operators.py:432
 msgid "Starts with"
 msgstr "Commence par"
 
-#: core/entity_filter/operators.py:424
+#: core/entity_filter/operators.py:433
 #, python-brace-format
 msgid "«{field}» starts with {values}"
 msgstr "«{field}» commence par {values}"
 
-#: core/entity_filter/operators.py:433
+#: core/entity_filter/operators.py:442
 msgid "Does not start with"
 msgstr "Ne commence pas par"
 
-#: core/entity_filter/operators.py:434
+#: core/entity_filter/operators.py:443
 #, python-brace-format
 msgid "«{field}» does not start with {values}"
 msgstr "«{field}» ne commence pas par {values}"
 
-#: core/entity_filter/operators.py:440
+#: core/entity_filter/operators.py:449
 msgid "Starts with (case insensitive)"
 msgstr "Commence par (Ne respecte pas la casse)"
 
-#: core/entity_filter/operators.py:441
+#: core/entity_filter/operators.py:450
 #, python-brace-format
 msgid "«{field}» starts with {values} (case insensitive)"
 msgstr "«{field}» commence par {values} (insensible à la casse)"
 
-#: core/entity_filter/operators.py:448
+#: core/entity_filter/operators.py:457
 msgid "Does not start with (case insensitive)"
 msgstr "Ne commence pas par (Ne respecte pas la casse)"
 
-#: core/entity_filter/operators.py:449
+#: core/entity_filter/operators.py:458
 #, python-brace-format
 msgid "«{field}» does not start with {values} (case insensitive)"
 msgstr "«{field}» ne commence pas par {values} (insensible à la casse)"
 
-#: core/entity_filter/operators.py:455
+#: core/entity_filter/operators.py:464
 msgid "Ends with"
 msgstr "Se termine par"
 
-#: core/entity_filter/operators.py:456
+#: core/entity_filter/operators.py:465
 #, python-brace-format
 msgid "«{field}» ends with {values}"
 msgstr "«{field}» finit par {values}"
 
-#: core/entity_filter/operators.py:465
+#: core/entity_filter/operators.py:474
 msgid "Does not end with"
 msgstr "Ne se termine pas par"
 
-#: core/entity_filter/operators.py:466
+#: core/entity_filter/operators.py:475
 #, python-brace-format
 msgid "«{field}» does not end with {values}"
 msgstr "«{field}» ne finit pas par {values}"
 
-#: core/entity_filter/operators.py:472
+#: core/entity_filter/operators.py:481
 msgid "Ends with (case insensitive)"
 msgstr "Se termine par (Ne respecte pas la casse)"
 
-#: core/entity_filter/operators.py:473
+#: core/entity_filter/operators.py:482
 #, python-brace-format
 msgid "«{field}» ends with {values} (case insensitive)"
 msgstr "«{field}» finit par {values} (insensible à la casse)"
 
-#: core/entity_filter/operators.py:480
+#: core/entity_filter/operators.py:489
 msgid "Does not end with (case insensitive)"
 msgstr "Ne se termine pas par (Ne respecte pas la casse)"
 
-#: core/entity_filter/operators.py:481
+#: core/entity_filter/operators.py:490
 #, python-brace-format
 msgid "«{field}» does not end with {values} (case insensitive)"
 msgstr "«{field}» ne finit pas par {values} (insensible à la casse)"
 
-#: core/entity_filter/operators.py:502 utils/date_range.py:276
+#: core/entity_filter/operators.py:511 utils/date_range.py:276
 msgid "Is empty"
 msgstr "Est vide"
 
-#: core/entity_filter/operators.py:506
+#: core/entity_filter/operators.py:515
 #, python-brace-format
 msgid "«{field}» is empty"
 msgstr "«{field}» est vide"
 
-#: core/entity_filter/operators.py:507
+#: core/entity_filter/operators.py:516
 #, python-brace-format
 msgid "«{field}» is not empty"
 msgstr "«{field}» n'est pas vide"
 
-#: core/entity_filter/operators.py:552
+#: core/entity_filter/operators.py:561
 msgid "Range"
 msgstr "Intervalle"
 
-#: core/job.py:104
+#: core/job.py:108
 msgid ""
 "The job manager does not respond.\n"
 "Please contact your administrator."
@@ -665,7 +665,7 @@ msgstr ""
 "Le gestionnaire de job ne répond pas.\n"
 "Veuillez contacter votre administrateur."
 
-#: core/job.py:110
+#: core/job.py:114
 #, python-brace-format
 msgid ""
 "There is a connection error with the job manager.\n"
@@ -678,7 +678,7 @@ msgstr ""
 "[Erreur originale depuis «{queue}»:\n"
 "{message}]"
 
-#: core/job.py:261
+#: core/job.py:265
 msgid "Redis queue"
 msgstr "Queue Redis"
 
@@ -869,30 +869,30 @@ msgstr "Utilisateurs inactifs"
 msgid "Private ({})"
 msgstr "Privé ({})"
 
-#: forms/base.py:221 forms/base.py:250 forms/entity_filter/forms.py:60
+#: forms/base.py:240 forms/base.py:269 forms/entity_filter/forms.py:60
 #: forms/relation.py:240 templates/creme_core/bricks/ptype-info.html:11
 msgid "General information"
 msgstr "Informations générales"
 
-#: forms/base.py:287 forms/mass_import.py:1182 models/entity.py:72
+#: forms/base.py:306 forms/mass_import.py:1218 models/entity.py:74
 #: models/entity_filter.py:100 models/header_filter.py:73
 #: models/relation.py:390
 msgid "Owner user"
 msgstr "Utilisateur propriétaire"
 
-#: forms/base.py:312
+#: forms/base.py:331
 msgid "Information on relationships"
 msgstr "Informations sur les relations"
 
-#: forms/base.py:317
+#: forms/base.py:336
 msgid "Relationships to add"
 msgstr "Relations à ajouter"
 
-#: forms/base.py:322 forms/relation.py:38 models/relation.py:474
+#: forms/base.py:341 forms/relation.py:38 models/relation.py:474
 msgid "Semi-fixed types of relationship"
 msgstr "Types de relation semi-fixés"
 
-#: forms/base.py:330
+#: forms/base.py:349
 #, python-format
 msgid ""
 "The property «%(property)s» is mandatory in order to use the relationship "
@@ -901,7 +901,7 @@ msgstr ""
 "La propriété «%(property)s» est obligatoire pour pouvoir utiliser la "
 "relation «%(predicate)s»"
 
-#: forms/base.py:333
+#: forms/base.py:352
 #, python-format
 msgid ""
 "These properties are mandatory in order to use the relationship "
@@ -910,26 +910,26 @@ msgstr ""
 "Ces propriétés sont obligatoires pour pouvoir utiliser la relation "
 "«%(predicate)s» : %(properties)s"
 
-#: forms/base.py:336
+#: forms/base.py:355
 msgid "You are not allowed to link the created entity (wrong owner?)."
 msgstr ""
 "Vous n'êtes pas autorisé à relier la fiche créée (mauvais propriétaire ?)"
 
-#: forms/base.py:341 models/entity.py:74
+#: forms/base.py:360 models/entity.py:76
 #: templates/creme_core/bricks/job.html:65
 msgid "Description"
 msgstr "Description"
 
-#: forms/base.py:415
+#: forms/base.py:434
 #, python-brace-format
 msgid "This relationship will be added: {predicate} «{entity}»"
 msgstr "Cette relation va être ajoutée : {predicate} «{entity}»"
 
-#: forms/base.py:421
+#: forms/base.py:440
 msgid "These relationships will be added: {}"
 msgstr "Ces relations vont être ajoutées : {}"
 
-#: forms/base.py:453
+#: forms/base.py:472
 msgid "You are not allowed to link this kind of entity."
 msgstr "Vous n'êtes pas autorisé à relier ce type de fiche."
 
@@ -960,12 +960,12 @@ msgctxt "creme_core-noun"
 msgid "Filter"
 msgstr "Filtre"
 
-#: forms/batch_process.py:191 forms/listview.py:345 forms/listview.py:498
+#: forms/batch_process.py:191 forms/listview.py:361 forms/listview.py:514
 #: models/history.py:568
 #: templates/creme_core/listview/search-widgets/boolean.html:3
 #: templates/creme_core/templatetags/listview/entity-filters.html:7
 #: templates/creme_core/templatetags/search-form.html:7
-#: views/entity_filter.py:264 views/entity_filter.py:288
+#: views/entity_filter.py:279 views/entity_filter.py:303
 msgid "All"
 msgstr "Tout"
 
@@ -1193,7 +1193,8 @@ msgid "Select a valid choice. That choice is not one of the available choices."
 msgstr ""
 "Sélectionnez un choix valide. Ce choix n'est pas un des choix disponibles."
 
-#: forms/header_filter.py:131 forms/mass_import.py:283 forms/mass_import.py:544
+#: forms/header_filter.py:131 forms/mass_import.py:294 forms/mass_import.py:566
+#: forms/mass_import.py:920
 msgid "Enter a valid value."
 msgstr "Saisissez une valeur valide."
 
@@ -1280,30 +1281,30 @@ msgstr ""
 "Vous pouvez combiner plusieurs expressions avec le séparateur «;»\n"
 "Ex: > 10 ; <= 10,5 \n"
 
-#: forms/listview.py:443 forms/listview.py:489 forms/listview.py:661
+#: forms/listview.py:459 forms/listview.py:505 forms/listview.py:677
 msgid "* is empty *"
 msgstr "* est vide *"
 
-#: forms/mass_import.py:66
+#: forms/mass_import.py:77
 #, python-brace-format
 msgid "Error reading document, unsupported file type: {file}."
 msgstr ""
 "Erreur lors de la lecture du document, type de fichier non supporté: {file}."
 
-#: forms/mass_import.py:86
+#: forms/mass_import.py:97
 #, python-brace-format
 msgid "Error reading document: {error}."
 msgstr "Erreur lors de la lecture du document: {error}."
 
-#: forms/mass_import.py:95
+#: forms/mass_import.py:106
 msgid "File to import"
 msgstr "Fichier à importer"
 
-#: forms/mass_import.py:99
+#: forms/mass_import.py:110
 msgid "Header present ?"
 msgstr "Entête présent ?"
 
-#: forms/mass_import.py:100
+#: forms/mass_import.py:111
 msgid ""
 "Does the first line of the line contain the header of the columns (eg: "
 "\"Last name\",\"First name\") ?"
@@ -1311,7 +1312,7 @@ msgstr ""
 "La 1ère ligne du fichier contient-il l'entête des colonnes de valeurs (ex: "
 "\"Nom\",\"Prénom\") ?"
 
-#: forms/mass_import.py:176
+#: forms/mass_import.py:187
 #, python-brace-format
 msgid ""
 "Error while extracting value: tried to retrieve and then build "
@@ -1321,7 +1322,7 @@ msgstr ""
 "construire «{value}» (colonne {column}) sur {model}. Erreur brute: "
 "[{raw_error}]"
 
-#: forms/mass_import.py:185
+#: forms/mass_import.py:196
 #, python-brace-format
 msgid ""
 "Error while extracting value: tried to retrieve «{value}» (column {column}) "
@@ -1330,7 +1331,7 @@ msgstr ""
 "Erreur lors de l'extraction de valeur: a essayé de retrouver "
 "«{value}» (colonne {column}) sur {model}. Erreur brute: [{raw_error}]"
 
-#: forms/mass_import.py:284
+#: forms/mass_import.py:295
 #, python-brace-format
 msgid ""
 "Select a valid choice. \"{value}\" is not one of the available sub-field."
@@ -1338,7 +1339,7 @@ msgstr ""
 "Sélectionnez un choix valide. \"{value}\" n'est pas un des sous-champs "
 "disponibles."
 
-#: forms/mass_import.py:428
+#: forms/mass_import.py:450
 #, python-brace-format
 msgid ""
 "Error while extracting value [{raw_error}]: tried to retrieve and then build "
@@ -1347,7 +1348,7 @@ msgstr ""
 "Erreur lors de l'extraction de valeur ({raw_error}) : a essayé de retrouver "
 "et puis de construire «{value}» sur {model}"
 
-#: forms/mass_import.py:437
+#: forms/mass_import.py:459
 #, python-brace-format
 msgid ""
 "Error while extracting value [{raw_error}]: tried to retrieve «{value}» on "
@@ -1356,12 +1357,12 @@ msgstr ""
 "Erreur lors de l'extraction de valeur ({raw_error}) : a essayé de retrouver "
 "«{value}» sur {model}"
 
-#: forms/mass_import.py:545 forms/mass_import.py:1202
+#: forms/mass_import.py:567 forms/mass_import.py:1238
 #, python-format
 msgid "You are not allowed to create: %(model)s"
 msgstr "Vous n'avez pas la permission de créer : %(model)s"
 
-#: forms/mass_import.py:625
+#: forms/mass_import.py:647
 #, python-brace-format
 msgid ""
 "Error while extracting value to build a Relation: tried to retrieve {field}"
@@ -1371,7 +1372,7 @@ msgstr ""
 "essayé de retrouver {field}=«{value}» (colonne {column}) sur {model}. Erreur "
 "brute: [{raw_error}]"
 
-#: forms/mass_import.py:643
+#: forms/mass_import.py:665
 #, python-brace-format
 msgid ""
 "Error while extracting value: tried to build {model} with data={data} "
@@ -1380,7 +1381,7 @@ msgstr ""
 "Erreur lors de l'extraction  de valeur: a essayé de construire {model} avec "
 "données={data} (colonne {column}) ➔ erreurs={errors}"
 
-#: forms/mass_import.py:652
+#: forms/mass_import.py:674
 #, python-brace-format
 msgid ""
 "Error while extracting value to build a Relation: tried to retrieve {field}"
@@ -1389,27 +1390,27 @@ msgstr ""
 "Erreur lors de l'extraction de valeur pour construire une Relation: a essayé "
 "de retrouver {field}=«{value}» (column {column}) sur {model}"
 
-#: forms/mass_import.py:691
+#: forms/mass_import.py:713
 msgid "The entity"
 msgstr "La fiche"
 
-#: forms/mass_import.py:699
+#: forms/mass_import.py:721
 msgid "which field"
 msgstr "quel champs"
 
-#: forms/mass_import.py:701
+#: forms/mass_import.py:723
 msgid "equals to"
 msgstr "Est égal à"
 
-#: forms/mass_import.py:718
+#: forms/mass_import.py:740
 msgid "This field doesn't exist in this ContentType."
 msgstr "Ce champ n'existe pas dans ce type de fiche."
 
-#: forms/mass_import.py:719
+#: forms/mass_import.py:741
 msgid "This column is not a valid choice."
 msgstr "Cette colonne n'est pas un choix valide'."
 
-#: forms/mass_import.py:855
+#: forms/mass_import.py:877
 #, python-brace-format
 msgid ""
 "Error while extracting value: tried to retrieve the choice «{value}» (column "
@@ -1418,11 +1419,11 @@ msgstr ""
 "Erreur lors de l'extraction de valeur: a essayé de retrouver le choix "
 "«{value}» (colonne {column}). Erreur brute: [{raw_error}]"
 
-#: forms/mass_import.py:964
+#: forms/mass_import.py:1000
 msgid "Key fields"
 msgstr "Champs clé"
 
-#: forms/mass_import.py:967
+#: forms/mass_import.py:1003
 msgid ""
 "Select at least one field if you want to use the \"update\" mode. If an "
 "entity already exists with the same field values, it will be simply updated "
@@ -1436,23 +1437,23 @@ msgstr ""
 "Mais si plusieurs fiches sont trouvées, une nouvelle fiche sera créée (pour "
 "éviter les erreurs)."
 
-#: forms/mass_import.py:975
+#: forms/mass_import.py:1011
 msgid "This document doesn't exist or doesn't exist any more."
 msgstr "Ce document n'existe pas/plus."
 
-#: forms/mass_import.py:976
+#: forms/mass_import.py:1012
 msgid "You have not the credentials to read this document."
 msgstr "Vous n'avez pas les droits pour lire ce document."
 
-#: forms/mass_import.py:986
+#: forms/mass_import.py:1022
 msgid "Update mode"
 msgstr "Mode mise-à-jour"
 
-#: forms/mass_import.py:987 forms/mass_import.py:1195
+#: forms/mass_import.py:1023 forms/mass_import.py:1231
 msgid "Field values"
 msgstr "Valeurs de champ"
 
-#: forms/mass_import.py:1133
+#: forms/mass_import.py:1169
 msgid ""
 "Several entities corresponding to the search have been found. So a new "
 "entity have been created to avoid errors."
@@ -1460,36 +1461,36 @@ msgstr ""
 "Plusieurs fiches correspondant à la recherche ont été trouvées. Donc une "
 "nouvelle fiche a été créée pour éviter les erreurs."
 
-#: forms/mass_import.py:1188
+#: forms/mass_import.py:1224
 msgid "Fixed relationships"
 msgstr "Relations fixes"
 
-#: forms/mass_import.py:1191
+#: forms/mass_import.py:1227
 msgid "Relationships from the file"
 msgstr "Relations depuis le fichier"
 
-#: forms/mass_import.py:1194
+#: forms/mass_import.py:1230
 msgid "General"
 msgstr "Général"
 
-#: forms/mass_import.py:1196
+#: forms/mass_import.py:1232
 msgid "Related properties"
 msgstr "Propriétés associées"
 
-#: forms/mass_import.py:1197
+#: forms/mass_import.py:1233
 msgid "Associated relationships"
 msgstr "Relations associées"
 
-#: forms/mass_import.py:1332
+#: forms/mass_import.py:1368
 msgid "Not in the file"
 msgstr "Pas dans le fichier"
 
-#: forms/mass_import.py:1336
+#: forms/mass_import.py:1372
 #, python-brace-format
 msgid "Column {index} - {name}"
 msgstr "Colonne {index} - {name}"
 
-#: forms/mass_import.py:1343
+#: forms/mass_import.py:1379
 msgid "Column {}"
 msgstr "Colonne {}"
 
@@ -1606,29 +1607,29 @@ msgstr "{dateperiod_value}{dateperiod_type}"
 msgid "* no property *"
 msgstr "* pas de propriété *"
 
-#: gui/bricks.py:373
+#: gui/bricks.py:377
 msgid "Information on the entity (generic)"
 msgstr "Information sur la fiche (générique)"
 
-#: gui/bricks.py:395
+#: gui/bricks.py:399
 #, python-brace-format
 msgid "Information «{model}»"
 msgstr "Informations «{model}»"
 
-#: gui/bricks.py:422
+#: gui/bricks.py:426
 #, python-brace-format
 msgid "Relationship block: «{predicate}»"
 msgstr "Bloc de relation: «{predicate}»"
 
-#: gui/bricks.py:728
+#: gui/bricks.py:742
 msgid "Unknown type of block (bad uninstall ?)"
 msgstr "Type de bloc inconnu (mauvaise désinstallation ?)"
 
-#: gui/bricks.py:838
+#: gui/bricks.py:852
 msgid "Information on the entity"
 msgstr "Informations sur la fiche"
 
-#: gui/bricks.py:858
+#: gui/bricks.py:872
 msgid "Title bar"
 msgstr "Barre de titre"
 
@@ -1662,26 +1663,26 @@ msgid_plural "seconds"
 msgstr[0] "seconde"
 msgstr[1] "secondes"
 
-#: gui/menu.py:523
+#: gui/menu.py:525
 #, python-brace-format
 msgid "{count} entity"
 msgid_plural "{count} entities"
 msgstr[0] "{count} Fiche"
 msgstr[1] "{count} Fiches"
 
-#: gui/menu.py:544
+#: gui/menu.py:546
 msgid "Quick creation"
 msgstr "Création rapide"
 
-#: gui/menu.py:567
+#: gui/menu.py:569
 msgid "No type available"
 msgstr "Aucun type disponible."
 
-#: gui/menu.py:737
+#: gui/menu.py:739
 msgid "Create an entity of any type"
 msgstr "Créer une fiche de n'importe quel type"
 
-#: gui/menu.py:778
+#: gui/menu.py:780
 msgid "No recently visited entity"
 msgstr "Aucune fiche récemment visitée"
 
@@ -2144,23 +2145,23 @@ msgstr ""
 "Certaines instances du modèle «{model}» ne peuvent être suprrimées car elles "
 "sont utiliséesvia une clé étrangère protégée : «{related} - {field}»"
 
-#: models/entity.py:62 models/relation.py:389
+#: models/entity.py:64 models/relation.py:389
 msgid "Creation date"
 msgstr "Date de création"
 
-#: models/entity.py:64
+#: models/entity.py:66
 msgid "Last modification"
 msgstr "Dernière modification"
 
-#: models/entity.py:89
+#: models/entity.py:92
 msgid "Create an entity"
 msgstr "Créer une fiche"
 
-#: models/entity.py:90
+#: models/entity.py:93
 msgid "Save the entity"
 msgstr "Enregistrer la fiche"
 
-#: models/entity.py:150 views/entity.py:83
+#: models/entity.py:153 views/entity.py:83
 #, python-brace-format
 msgid "Entity #{id} (not viewable)"
 msgstr "Fiche #{id} (non visible)"
@@ -2331,7 +2332,7 @@ msgstr[1] ""
 "Votre filtre doit être privé pour pouvoir utiliser ces sous-filtres privés : "
 "{}"
 
-#: models/entity_filter.py:480
+#: models/entity_filter.py:481
 msgid "You can not delete this filter, because it is used as sub-filter by: {}"
 msgstr ""
 "Vous ne pouvez pas supprimer ce filtre, car il est utilisé comme sous-filtre "
@@ -3901,8 +3902,8 @@ msgid "«{entity}» deletion caused an unexpected error [{error}]."
 msgstr ""
 "La suppression de «{entity}» a provoqué une erreur inattendue [{error}]."
 
-#: views/entity.py:850 views/entity.py:984 views/relation.py:405
-#: views/relation.py:607
+#: views/entity.py:850 views/entity.py:984 views/relation.py:406
+#: views/relation.py:608
 msgid "Operation successfully completed"
 msgstr "Opération effectuée avec succès"
 
@@ -3928,7 +3929,7 @@ msgstr "Ce modèle n'utilise pas la vue de suppression générique."
 msgid "«{entity}» does not use the generic deletion view."
 msgstr "«{entity}» n'utilise pas la vue de suppression générique."
 
-#: views/entity.py:911 views/entity.py:916 views/relation.py:399
+#: views/entity.py:911 views/entity.py:916 views/relation.py:400
 #, python-brace-format
 msgid "{entity} : <b>Permission denied</b>"
 msgstr "{entity} : <b>Permission refusée</b>"
@@ -3942,14 +3943,14 @@ msgstr "«{entity}» ne peut être supprimé."
 msgid "No selected entities"
 msgstr "Aucune fiche séléctionnée"
 
-#: views/entity.py:969 views/relation.py:570
+#: views/entity.py:969 views/relation.py:571
 #, python-brace-format
 msgid "{count} entity doesn't exist or has been removed."
 msgid_plural "{count} entities don't exist or have been removed."
 msgstr[0] "{count} fiche n'existe pas ou a été supprimée."
 msgstr[1] "{count} fiches n'existent pas ou ont été supprimées."
 
-#: views/entity_filter.py:87
+#: views/entity_filter.py:90
 msgid ""
 "Notice: your database is not case sensitive, so the string operators which "
 "are case sensitive and the ones which are not will accept the same entities."
@@ -3958,11 +3959,33 @@ msgstr ""
 "opérateurs sur chaîne de caractères qui sont sensibles à la casse et ceux "
 "qui ne le sont pas accepteront les mêmes fiches."
 
-#: views/entity_filter.py:180
+#: views/entity_filter.py:94
+msgid ""
+"Notice: your database is not case sensitive for the \"equals\" operator, so "
+"the string equality operators which are case sensitive and the ones which "
+"are not will accept the same entities."
+msgstr ""
+"Remarque : votre base de données n'est pas sensible à la casse pour "
+"l'opérateur \"égale\", donc les opérateurs d'égalité sur chaîne de "
+"caractères qui sont sensibles à la casse et ceux qui ne le sont pas "
+"accepteront les mêmes fiches."
+
+#: views/entity_filter.py:99
+msgid ""
+"Notice: your database is not case sensitive, so the string operators which "
+"are case sensitive and the ones which are not will accept the same entities "
+"(excepted equality ones, which are case sensitive)."
+msgstr ""
+"Remarque : votre base de données n'est pas sensible à la casse, donc les "
+"opérateurs sur chaîne de caractères qui sont sensibles à la casse et ceux "
+"qui ne le sont pas accepteront les mêmes fiches (exceptés ceux d'égalité qui "
+"sont sensibles à la casse)."
+
+#: views/entity_filter.py:195
 msgid "Save the modified filter"
 msgstr "Enregistrer le filtre modifié"
 
-#: views/entity_filter.py:247
+#: views/entity_filter.py:262
 msgid "The filter can not be deleted because of its dependencies."
 msgstr "Le filtre ne peut être supprimé à cause de ses dépendances."
 
@@ -4018,21 +4041,21 @@ msgstr "Importer des «{model}» depuis un fichier"
 msgid "Unknown file type ; please contact your administrator."
 msgstr "Type de fichier inconnu ; veuillez contacter votre administrateur."
 
-#: views/relation.py:160
+#: views/relation.py:161
 #, python-brace-format
 msgid "Relationships for «{entity}»"
 msgstr "Relations pour «{entity}»"
 
-#: views/relation.py:161 views/relation.py:232
+#: views/relation.py:162 views/relation.py:233
 msgid "Save the relationships"
 msgstr "Enregistrer les relations"
 
-#: views/relation.py:187
+#: views/relation.py:188
 #, python-brace-format
 msgid "This type of relationship is not compatible with «{model}»."
 msgstr "Ce type de relation n'est pas compatible avec «{model}»."
 
-#: views/relation.py:204
+#: views/relation.py:205
 #, python-brace-format
 msgid ""
 "This type of relationship needs an entity with this property: {properties}."
@@ -4044,19 +4067,19 @@ msgstr[0] ""
 msgstr[1] ""
 "Ce type de relation nécessite une fiche avec ces propriétés : {properties}."
 
-#: views/relation.py:231
+#: views/relation.py:232
 msgid "Multiple adding of relationships"
 msgstr "Ajout multiple de relations"
 
-#: views/relation.py:597
+#: views/relation.py:598
 msgid "Incompatible type for object entity with id={}"
 msgstr "Type incompatible pour la fiche objet avec l'id={}"
 
-#: views/relation.py:599
+#: views/relation.py:600
 msgid "Missing compatible property for object entity with id={}"
 msgstr "Il manque une propriété compatible pour la fiche objet avec l'id={}"
 
-#: views/relation.py:601
+#: views/relation.py:602
 msgid "Permission denied to entity with id={}"
 msgstr "Permission refusée pour la fiche avec l'id={}"
 

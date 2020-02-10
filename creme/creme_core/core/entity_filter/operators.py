@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -27,7 +27,10 @@ from django.db.models.query_utils import Q
 from django.utils.translation import gettext_lazy as _, gettext
 
 # from creme.creme_core.models import EntityFilter
-from creme.creme_core.utils.db import is_db_case_sensitive
+from creme.creme_core.utils.db import (
+    is_db_equal_case_sensitive,
+    is_db_like_case_sensitive,
+)
 from creme.creme_core.utils.meta import FieldInfo
 
 from . import entity_filter_registries, EF_USER
@@ -254,10 +257,10 @@ class EqualsOperator(ConditionOperator):
     allowed_fieldtypes = FIELDTYPES_ALL
     accept_subpart = False
     description_pattern = _('«{field}» is {values}')
-    key_pattern = '{}__exact'  # NB: have not real meaning here
+    key_pattern = '{}__exact'  # NB: has not real meaning here
 
     def _accept_single_value(self, *, field_value, value):
-        if is_db_case_sensitive():
+        if is_db_equal_case_sensitive():
             v1 = field_value
             v2 = value
         else:
@@ -355,12 +358,15 @@ class StringOperatorBase(ConditionOperator):
     def _accept_string(self, *, field_value, value):
         raise NotImplementedError
 
+    def _is_db_case_sensitive(self):
+        return is_db_like_case_sensitive()
+
     def _accept_value(self, *, field_value, value):
         if field_value is None:
             return False
 
         # TODO: local cache (in self) for <is_db_case_sensitive()> ??
-        if not self.case_sensitive or not is_db_case_sensitive():
+        if not self.case_sensitive or not self._is_db_case_sensitive():
             value = value.lower()
             field_value = field_value.lower()  # TODO: field_value.lower() once ??
 
@@ -374,6 +380,9 @@ class IEqualsOperator(StringOperatorBase):
     description_pattern = _('«{field}» is equal to {values} (case insensitive)')
     key_pattern = '{}__iexact'
     case_sensitive = False
+
+    def _is_db_case_sensitive(self):
+        return is_db_equal_case_sensitive()
 
     def _accept_string(self, *, field_value, value):
         return value == field_value
