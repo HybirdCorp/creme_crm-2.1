@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2019  Hybird
+#    Copyright (C) 2019-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -393,7 +393,7 @@ class RegularCharField(ListViewSearchField):
     widget = TextLVSWidget
 
     def to_python(self, value):
-        return Q(**{'{}__contains'.format(self.cell.value): value}) if value else Q()
+        return Q(**{'{}__icontains'.format(self.cell.value): value}) if value else Q()
 
 
 class RegularBooleanField(ListViewSearchField):
