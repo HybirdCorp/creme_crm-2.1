@@ -34,8 +34,12 @@ from creme.creme_core.utils.meta import ModelFieldEnumerator
 from creme.creme_core.utils.unicode_collation import collator
 
 from .. import get_rgraph_model
-from ..constants import (RGT_DAY, RGT_MONTH, RGT_YEAR, RGT_RANGE, RGT_FK, RGT_RELATION,
-        RGT_CUSTOM_DAY, RGT_CUSTOM_MONTH, RGT_CUSTOM_YEAR, RGT_CUSTOM_RANGE, RGT_CUSTOM_FK)
+from ..constants import (
+    RGT_DAY, RGT_MONTH, RGT_YEAR, RGT_RANGE,
+    RGT_FK, RGT_RELATION,
+    RGT_CUSTOM_DAY, RGT_CUSTOM_MONTH, RGT_CUSTOM_YEAR, RGT_CUSTOM_RANGE,
+    RGT_CUSTOM_FK,
+)
 from ..core.graph import RGRAPH_HANDS_MAP
 from ..report_aggregation_registry import field_aggregation_registry
 from ..report_chart_registry import report_chart_registry
@@ -219,6 +223,10 @@ class ReportGraphForm(CremeModelForm):  # NB: not <CremeEntityForm> to avoid Rel
             widget = abscissa_field_f.widget
             widget.source_val = get_data('abscissa_field')
             widget.target_val = get_data('abscissa_group_by')
+
+            # NB: ugly hack ; see AbscissaGroupBySelect/toggleDaysField.
+            #     Should be removed in Creme2.2 with a clean field/widget
+            fields['abscissa_group_by'].widget.attrs['data-initial-value'] = get_data('abscissa_group_by')
         elif instance.pk is not None:
             fields['aggregate'].initial = aggregate
             aggregate_field_f.initial   = ordinate_field_name
@@ -227,6 +235,9 @@ class ReportGraphForm(CremeModelForm):  # NB: not <CremeEntityForm> to avoid Rel
             widget = abscissa_field_f.widget
             widget.source_val = instance.abscissa
             widget.target_val = instance.type
+
+            # NB: idem
+            fields['abscissa_group_by'].widget.attrs['data-initial-value'] = instance.type
 
         # TODO: remove this sh*t when is_count is a real widget well initialized (disabling set by JS)
         if is_count_f.initial or instance.is_count or data.get('is_count'):
