@@ -1,5 +1,5 @@
 # FR LOCALISATION OF 'EMAILS' APP
-# Copyright (C) 2019 Hybird
+# Copyright (C) 2020 Hybird
 # This file is distributed under the same license as the Creme package.
 #
 # > django-admin.py makemessages -l fr -i "tests/*"
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Emails 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 14:35+0100\n"
+"POT-Creation-Date: 2020-02-26 11:11+0100\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -1005,8 +1005,11 @@ msgid "Number of email(s)"
 msgstr "Nombre d'e-mail(s)"
 
 #: templates/emails/bricks/sendings.html:30
-msgid "not sent"
-msgstr "non envoyé"
+#, python-format
+msgid "%(count)s not sent"
+msgid_plural "%(count)s not sent"
+msgstr[0] "%(count)s non envoyé"
+msgstr[1] "%(count)s non envoyés"
 
 #: templates/emails/bricks/sendings.html:35
 msgid "Delete this sending"
@@ -1222,6 +1225,9 @@ msgstr "Nouveaux fichiers joints pour «{entity}»"
 msgid "Add the attachments"
 msgstr "Ajouter les fichiers joints"
 
+#~ msgid "not sent"
+#~ msgstr "non envoyé"
+
 #~ msgid "Link to an existing email"
 #~ msgstr "Lier à un e-mail existant"
 
@@ -1329,11 +1335,6 @@ msgstr "Ajouter les fichiers joints"
 
 #~ msgid "Spam emails"
 #~ msgstr "E-mails entrants marqués comme spam"
-
-#~ msgid "%(msg_count)s new message"
-#~ msgid_plural "%(msg_count)s new messages"
-#~ msgstr[0] "%(msg_count)s nouveau message"
-#~ msgstr[1] "%(msg_count)s nouveaux messages"
 
 #~ msgid "Portal"
 #~ msgstr "Portail"
