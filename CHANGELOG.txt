@@ -1,3 +1,37 @@
+== Version 2.1.2 ==
+
+  UPGRADE NOTE :
+    - You should upgrade the minor version of Django 2.2 (2.2.11 or more) (eg: pip install -U django==2.2.11).
+
+  Users side :
+  ------------
+    # The quick-search is now case insentitive, like global search.
+    # The help message (about case sensitivity) in the form of filters has been improved.
+    # Apps :
+        * Creme_config :
+            - There was a crash when adding a custom-field to a type with an empty list of choices.
+        * Reports :
+            - The button which refreshes the preview of a Report had no label.
+            - When a ReportGraph was edited, the grouping-type for abscissa (second <select>) was
+              reset to the first choice, ignoring the value in the graph.
+            - The field "description" in the ReportGraph's form has been excluded.
+        * Emails :
+            - In the block for EmailSending, a plural translation was missing.
+
+  Developers side :
+  -----------------
+    Non breaking changes :
+    ----------------------
+        # The view mixin MergeFormMixin uses now its method 'get_merge_form_registry()'.
+        # The template filter "idiv" has been fixed to use the floor division like this name is suggesting.
+          It was changed not voluntarily with the use of Python3.
+
+    Breaking changes :
+    ------------------
+        # The function 'creme_core.utils.db.is_db_case_sensitive()' has been replaced by
+          the functions 'is_db_equal_case_sensitive()' & 'is_db_like_case_sensitive()'.
+
+
 == Version 2.1.1 ==
 
   UPGRADE NOTE :
