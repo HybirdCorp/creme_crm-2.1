@@ -1,7 +1,36 @@
+== Version 2.1.3 ==
+
+  Users side :
+  ------------
+    # Apps :
+        * Documents :
+            - The label of the "Download" button in the brick for related Documents has been fixed.
+        * Recurrents :
+            - There was a crash when the app 'recurrents' was installed but not 'billing'.
+        * Emails :
+            - The verbose name of 'EntityEmail' is now consistent with the rest of the app.
+        * Reports :
+            - The brick of ReportGraphs has been fixed ; the 'ordinate_error' was not used.
+
+  Developers side :
+  -----------------
+    Non breaking changes :
+    ----------------------
+        # Apps:
+            * Billing :
+                - The swapped model for Report & ReportGraph is now used in the populate script.
+
+    Breaking changes :
+    ------------------
+        # The assertion in 'creme_core.forms.base.CremeEntityForm', which checks the model, has been fixed.
+        # Two old remaining template files 'portal.html' have been removed.
+
+
 == Version 2.1.2 ==
 
   UPGRADE NOTE :
     - You should upgrade the minor version of Django 2.2 (2.2.11 or more) (eg: pip install -U django==2.2.11).
+    - You should re-generate the media files (python manage.py generatemedia).
 
   Users side :
   ------------
