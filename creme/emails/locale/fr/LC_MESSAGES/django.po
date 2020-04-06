@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Emails 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-26 11:11+0100\n"
+"POT-Creation-Date: 2020-04-01 17:02+0200\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -23,8 +23,7 @@ msgstr "Ré-envoyer l'e-mail"
 msgid "Re-send email(s)"
 msgstr "Ré-envoyer les e-mails"
 
-#: apps.py:28 models/mail.py:101
-#: templates/emails/bricks/lw-mails-history.html:7
+#: apps.py:28 templates/emails/bricks/lw-mails-history.html:7
 #: templates/emails/bricks/lw-mails.html:7
 #: templates/emails/bricks/mails-history.html:7
 #: templates/emails/bricks/synchronization.html:9
@@ -72,7 +71,7 @@ msgid "Parent mailing lists"
 msgstr "Listes de diffusion parentes"
 
 #: bricks.py:190 forms/template.py:46 forms/template.py:86 forms/template.py:88
-#: models/mail.py:89 models/sending.py:94 models/template.py:40
+#: models/mail.py:93 models/sending.py:94 models/template.py:40
 #: templates/emails/bricks/attachments.html:7
 msgid "Attachments"
 msgstr "Fichiers attachés"
@@ -146,7 +145,7 @@ msgstr "Création de {entity}"
 msgid "Lists"
 msgstr "Listes"
 
-#: forms/mail.py:60 models/mail.py:51
+#: forms/mail.py:60 models/mail.py:55
 msgid "Sender"
 msgstr "Émetteur"
 
@@ -263,7 +262,7 @@ msgstr "Adresse e-mail de l'expéditeur"
 msgid "Email template"
 msgstr "Patron d'e-mail"
 
-#: forms/sending.py:45 forms/sending.py:55 models/mail.py:55
+#: forms/sending.py:45 forms/sending.py:55 models/mail.py:59
 #: models/sending.py:80
 msgid "Sending date"
 msgstr "Date d'envoi"
@@ -312,12 +311,12 @@ msgstr "La date d'envoi doit être dans le futur"
 msgid "You can use variables: {}"
 msgstr "Vous pouvez utiliser les variables : {}"
 
-#: forms/template.py:44 models/mail.py:54 models/sending.py:88
+#: forms/template.py:44 models/mail.py:58 models/sending.py:88
 #: models/signature.py:34 models/template.py:35
 msgid "Body"
 msgstr "Corps"
 
-#: forms/template.py:45 models/mail.py:82 models/sending.py:89
+#: forms/template.py:45 models/mail.py:86 models/sending.py:89
 #: models/template.py:36
 msgid "Body (HTML)"
 msgstr "Corps (HTML)"
@@ -351,53 +350,59 @@ msgstr "Campagne d'envois d'e-mails"
 msgid "Emailing campaigns"
 msgstr "Campagnes d'envois d'e-mails"
 
-#: models/mail.py:43
+#: models/mail.py:47
 msgid "Number of reads"
 msgstr "Nombre de lecture"
 
-#: models/mail.py:46 templates/emails/bricks/base/synchronization.html:17
+#: models/mail.py:50 templates/emails/bricks/base/synchronization.html:17
 #: templates/emails/bricks/lw-mails.html:13
 msgid "Status"
 msgstr "Statut"
 
-#: models/mail.py:52 templates/emails/bricks/lw-mails.html:12
+#: models/mail.py:56 templates/emails/bricks/lw-mails.html:12
 msgid "Recipient"
 msgstr "Destinataire"
 
-#: models/mail.py:53 models/sending.py:87 models/template.py:34
+#: models/mail.py:57 models/sending.py:87 models/template.py:34
 #: templates/emails/bricks/base/synchronization.html:20
 msgid "Subject"
 msgstr "Sujet"
 
-#: models/mail.py:56
+#: models/mail.py:60
 msgid "Reception date"
 msgstr "Date de réception"
 
-#: models/mail.py:78 models/sending.py:176
+#: models/mail.py:82 models/sending.py:176
 msgid "Email ID"
 msgstr "Identifiant de l'e-mail"
 
-#: models/mail.py:83 models/sending.py:90 models/template.py:37
+#: models/mail.py:87 models/sending.py:90 models/template.py:37
 msgid "Signature"
 msgstr "Signature"
 
-#: models/mail.py:92
+#: models/mail.py:96
 msgid "Create an email"
 msgstr "Créer un e-mail"
 
-#: models/mail.py:93
+#: models/mail.py:97
 msgid "Save the email"
 msgstr "Enregister l'e-mail"
 
-#: models/mail.py:94 views/mail.py:239
+#: models/mail.py:98 views/mail.py:239
 msgid "Send the email"
 msgstr "Envoyer l'e-mail"
 
-#: models/mail.py:100
+#: models/mail.py:106
+msgctxt "emails"
 msgid "Email"
 msgstr "E-mail"
 
-#: models/mail.py:118
+#: models/mail.py:107
+msgctxt "emails"
+msgid "Emails"
+msgstr "E-mails"
+
+#: models/mail.py:124
 #, python-brace-format
 msgid "EMail <from: {sender}> <to: {to}> <status: {status}>"
 msgstr "E-Mail <de: {sender}> <à: {to}> <statut: {status}>"
