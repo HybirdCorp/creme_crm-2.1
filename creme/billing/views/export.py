@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2018  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -84,7 +84,8 @@ def export_as_pdf(request, base_id):
     tmp_dir_path = mkdtemp(prefix='creme_billing_latex')
     latex_file_path = path.join(tmp_dir_path, '{}.tex'.format(basename))
 
-    with open(latex_file_path, 'w') as f:
+    # NB: we precise the encoding or it oddly crashes on some systems...
+    with open(latex_file_path, 'w', encoding='utf-8') as f:
         f.write(smart_str(template.render(context)))
 
     # NB: return code seems always 1 even when there is no error...
