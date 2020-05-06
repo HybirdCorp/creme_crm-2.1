@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -30,13 +30,23 @@ from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _, pgettext_lazy
 
 from creme.creme_core.backends import export_backend_registry
-from creme.creme_core.core.entity_cell import (EntityCell, EntityCellRegularField,
-        EntityCellCustomField, EntityCellFunctionField, EntityCellRelation)
+from creme.creme_core.core.entity_cell import (
+    EntityCell,
+    EntityCellRegularField,
+    EntityCellCustomField,
+    EntityCellFunctionField,
+    EntityCellRelation,
+)
 from creme.creme_core.forms import CremeEntityForm, CremeForm
 from creme.creme_core.forms.fields import AjaxModelChoiceField, CreatorEntityField, DateRangeField
 from creme.creme_core.forms.header_filter import EntityCellsField, EntityCellsWidget
 from creme.creme_core.forms.widgets import Label
-from creme.creme_core.models import CremeEntity, HeaderFilter, EntityFilter
+from creme.creme_core.models import (
+    CremeEntity,
+    HeaderFilter,
+    EntityFilter,
+    FieldsConfig,
+)
 from creme.creme_core.utils.meta import ModelFieldEnumerator, is_date_field
 
 from .. import constants, get_report_model
@@ -213,10 +223,13 @@ class ReportHandsField(EntityCellsField):
 
     def _regular_fields_enum(self, model):
         fields = super()._regular_fields_enum(model)
-        fields.filter(lambda field, depth: not (depth and isinstance(field, (ForeignKey, ManyToManyField))
-                                                and issubclass(field.remote_field.model, CremeEntity)
-                                               )
-                     )
+        fields.filter(
+            lambda field, depth: not (
+                depth and isinstance(field, (ForeignKey, ManyToManyField))
+                and
+                issubclass(field.remote_field.model, CremeEntity)
+            )
+        )
 
         return fields
 
@@ -243,16 +256,29 @@ class ReportHandsField(EntityCellsField):
             authorized_fields       = field_aggregation_registry.authorized_fields
             authorized_customfields = field_aggregation_registry.authorized_customfields
 
+            fconf = FieldsConfig.get_4_model(model)
+            non_hiddable_aggnames = {
+                cell.value
+                for cell in self._non_hiddable_cells
+                if cell.type_id == _EntityCellAggregate.type_id
+            }
+
             for aggregate in field_aggregation_registry.aggregations:
                 pattern = aggregate.pattern
                 title   = aggregate.title
 
-                for f_name, f_vname in ModelFieldEnumerator(model, deep=0) \
-                                            .filter((lambda f, deep: isinstance(f, authorized_fields)),
-                                                    viewable=True,
-                                                   ) \
-                                            .choices():
-                    agg_id = _REGULAR_AGG_PREFIX + pattern.format(f_name)
+                for f_name, f_vname in ModelFieldEnumerator(
+                    model, deep=0,
+                ).filter(
+                    (lambda f, deep: isinstance(f, authorized_fields)),
+                    viewable=True,
+                ).choices():
+                    agg_name = pattern.format(f_name)
+
+                    if fconf.is_fieldname_hidden(f_name) and agg_name not in non_hiddable_aggnames:
+                        continue
+
+                    agg_id = _REGULAR_AGG_PREFIX + agg_name
                     reg_agg_choices.append((agg_id, '{} - {}'.format(title, f_vname)))
 
                     builders[agg_id] = ReportHandsField._build_4_regular_aggregate
