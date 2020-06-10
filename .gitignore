@@ -1,0 +1,51 @@
+syntax: glob
+
+*~
+*.blend1
+*.pyc
+*.db
+local_settings*.py
+django.wsgi
+*.orig
+.project*
+.settings*
+
+creme/media/upload/*/*
+creme/media/static/*
+_generated_media_names.py
+
+# creme/activesync/SyncEngine/*
+# creme/activesync/backup/*
+
+# Python package
+*.egg-info
+
+# NetBeans
+nbproject/*
+.idea/*
+
+# PyDev
+.pydev*
+
+# coverage.py
+.coverage
+.coverage.*
+htmlcov/*
+
+# mypy
+.mypy_cache/*
+
+# HG
+\.orig\..*$
+\.orig$
+\.chg\..*$
+\.rej$
+\.conflict\~$
+
+# nodejs
+node_modules/
+.coverage-karma/
+.eslint.*
+
+#syntax: regexp
+#^creme/billing/templates/billing/templates/hyinvoice\.tex$
