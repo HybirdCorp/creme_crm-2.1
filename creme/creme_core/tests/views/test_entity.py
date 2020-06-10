@@ -278,6 +278,16 @@ class EntityViewsTestCase(ViewsTestCase, BrickTestCaseMixin):
         self.assertStillExists(entity01)
         self.assertStillExists(entity02)
 
+        with self.assertNoException():
+            msg = response.context['error_message']
+
+        self.assertEqual(
+            _('«{entity}» can not be deleted because of its dependencies.').format(
+                entity=entity01.name,
+            ) + ' ({} «{}»)'.format(rtype.predicate, entity02.name),
+            msg
+        )
+
     def test_delete_entity06(self):
         "is_deleted=False -> trash (AJAX version)."
         user = self.login()

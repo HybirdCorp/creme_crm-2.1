@@ -43,7 +43,7 @@ from ..forms.bulk import BulkDefaultEditForm
 from ..forms.merge import form_factory as merge_form_factory, MergeEntitiesBaseForm
 from ..gui import bulk_update  # NB: do no import <bulk_update_registry> to facilitate unit testing
 from ..gui.merge import merge_form_registry
-from ..models import CremeEntity, EntityCredentials, FieldsConfig, Sandbox
+from ..models import CremeEntity, EntityCredentials, FieldsConfig, Relation, Sandbox
 from ..models.fields import UnsafeHTMLField
 from ..utils import (
     get_ct_or_404,
@@ -1011,7 +1011,29 @@ def delete_entity(request, entity_id):
         if code == 404: raise Http404(msg)
         # TODO: 400 => ConflictError ??
 
-        raise PermissionDenied(msg, args)
+        def _deps_as_str(d):
+            if not isinstance(d, dict):
+                return '??'
+
+            user = request.user
+            deps = []
+            for dep in d.get('protected_objects', ())[:10]:
+                if isinstance(dep, Relation):
+                    deps.append('{} «{}»'.format(
+                        dep.type.predicate,
+                        dep.object_entity.allowed_str(user),
+                    ))
+                elif isinstance(dep, CremeEntity):
+                    deps.append(dep.allowed_str(user))
+                else:
+                    deps.append(str(dep))
+
+            return ', '.join(deps)
+
+        # raise PermissionDenied(msg, args)
+        raise PermissionDenied(
+            msg if not args else '{} ({})'.format(msg, _deps_as_str(args[0]))
+        )
 
     url = (entity.get_lv_absolute_url()                   if hasattr(entity, 'get_lv_absolute_url') else
            entity.get_related_entity().get_absolute_url() if hasattr(entity, 'get_related_entity') else
