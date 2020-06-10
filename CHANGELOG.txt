@@ -4,6 +4,11 @@
   ------------
     # A deep-copy bug in 'creme_core.forms.header_filter.EntityCellsField' has been fixed ;
       it could cause issues with hidden fields when editing list-views views (HeaderFilters).
+    # Values of decimal CustomFields are now localized in list-views.
+    # Apps :
+        * Reports :
+            - The export for some types of CustomField was broken (multi-enum) or not localized (datetime, bool, decimal).
+            - Aggregates are now localized in exported reports.
 
 
 == Version 2.1.4 ==

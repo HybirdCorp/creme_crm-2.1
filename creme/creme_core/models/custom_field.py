@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -21,11 +21,14 @@
 from collections import defaultdict, OrderedDict
 import uuid
 
-from django.core.validators import EMPTY_VALUES
-from django.db.models import (UUIDField, ForeignKey, CharField, PositiveSmallIntegerField,
-        IntegerField, DecimalField, DateTimeField, BooleanField, ManyToManyField, CASCADE)
 from django import forms
-from django.utils.formats import date_format
+from django.core.validators import EMPTY_VALUES
+from django.db.models import (
+    UUIDField, ForeignKey, CharField, PositiveSmallIntegerField,
+    IntegerField, DecimalField, DateTimeField, BooleanField, ManyToManyField,
+    CASCADE,
+)
+from django.utils.formats import date_format, number_format
 from django.utils.timezone import localtime
 from django.utils.translation import gettext, gettext_lazy as _
 
@@ -242,6 +245,11 @@ class CustomFieldFloat(CustomFieldValue):
 
     class Meta:
         app_label = 'creme_core'
+
+    # TODO: factorise with gui.field_printers
+    def __str__(self):
+        value = self.value
+        return number_format(value, use_l10n=True) if value else ''
 
     @staticmethod
     def _get_formfield(**kwargs):

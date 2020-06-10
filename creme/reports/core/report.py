@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2013-2019  Hybird
+#    Copyright (C) 2013-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -24,6 +24,7 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import ManyToManyField, ForeignKey, FieldDoesNotExist
+from django.utils.formats import number_format
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 
@@ -33,8 +34,13 @@ from creme.creme_core.gui.field_printers import field_printers_registry
 from creme.creme_core.models import CremeEntity, RelationType, CustomField
 from creme.creme_core.utils.meta import FieldInfo
 
-from ..constants import (RFT_FUNCTION, RFT_RELATION, RFT_FIELD, RFT_CUSTOM,
-        RFT_AGG_FIELD, RFT_AGG_CUSTOM, RFT_RELATED)
+from ..constants import (
+    RFT_FUNCTION,
+    RFT_RELATION,
+    RFT_FIELD, RFT_CUSTOM,
+    RFT_AGG_FIELD, RFT_AGG_CUSTOM,
+    RFT_RELATED,
+)
 from ..report_aggregation_registry import field_aggregation_registry
 
 # TODO: use Window/Frame to compute aggregate ?
@@ -371,7 +377,8 @@ class RHCustomField(ReportHand):
 
     def _get_value_single_on_allowed(self, entity, user, scope):
         cvalue = entity.get_custom_value(self._cfield)
-        return str(cvalue.value) if cvalue else ''
+        # return str(cvalue.value) if cvalue else ''
+        return str(cvalue) if cvalue else ''
 
 
 @REPORT_HANDS_MAP(RFT_RELATION)
@@ -441,6 +448,7 @@ class RHAggregate(ReportHand):
     def __init__(self, report_field):
         self._cache_key   = None
         self._cache_value = None
+        self._decimal_pos = None
         field_name, aggregation_id = report_field.name.split('__', 1)
         aggregation = field_aggregation_registry.get(aggregation_id)
 
@@ -464,8 +472,16 @@ class RHAggregate(ReportHand):
             return self._cache_value
 
         self._cache_key = scope
-        self._cache_value = result = scope.aggregate(rh_calculated_agg=self._aggregation_q) \
-                                          .get('rh_calculated_agg') or 0
+
+        agg_result = scope.aggregate(
+            rh_calculated_agg=self._aggregation_q,
+        ).get('rh_calculated_agg') or 0
+        self._cache_value = result = number_format(
+            agg_result,
+            use_l10n=True,
+            # NB: if we do not set this, computed Decimals have trailing '0's
+            decimal_pos=self._decimal_pos,
+        )
 
         return result
 
@@ -480,6 +496,9 @@ class RHAggregateRegularField(RHAggregate):
 
         if not isinstance(field, field_aggregation_registry.authorized_fields):
             raise ReportHand.ValueError('This type of field can not be aggregated: "{}"'.format(field_name))
+
+        # TODO: ugly (use a side effect instead of returning data)
+        self._decimal_pos = getattr(field, 'decimal_places', None)
 
         return (aggregation.func(field_name), field.verbose_name)
 
@@ -497,7 +516,12 @@ class RHAggregateCustomField(RHAggregate):
         if cfield.field_type not in field_aggregation_registry.authorized_customfields:
             raise ReportHand.ValueError('This type of custom field can not be aggregated: "{}"'.format(field_name))
 
-        return (aggregation.func('{}__value'.format(cfield.get_value_class().get_related_name())),
+        value_class = cfield.get_value_class()
+
+        # TODO: ugly (use a side effect instead of returning data)
+        self._decimal_pos = getattr(value_class._meta.get_field('value'), 'decimal_places', None)
+
+        return (aggregation.func('{}__value'.format(value_class.get_related_name())),
                 cfield.name,
                )
 
