@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 
 try:
+    from copy import deepcopy
+
     from django.contrib.contenttypes.models import ContentType
 
     from ..fake_models import FakeContact
     from .base import FieldTestCase
-    from creme.creme_core.core.entity_cell import (EntityCellRegularField,
-            EntityCellCustomField, EntityCellFunctionField, EntityCellRelation)
+    from creme.creme_core.core.entity_cell import (
+        EntityCellRegularField,
+        EntityCellCustomField,
+        EntityCellFunctionField,
+        EntityCellRelation,
+    )
     from creme.creme_core.core.function_field import function_field_registry
     from creme.creme_core.forms.header_filter import EntityCellsField
     from creme.creme_core.models import RelationType, CustomField
@@ -82,3 +88,12 @@ class EntityCellsFieldTestCase(FieldTestCase):
         self.assertCellOK(cells[2], EntityCellFunctionField, funcfield.name)
         self.assertCellOK(cells[3], EntityCellCustomField,   str(customfield.id))
         self.assertCellOK(cells[4], EntityCellRegularField, 'first_name')
+
+    def test_copy(self):
+        field1 = EntityCellsField(content_type=self.ct_contact)
+        field2 = deepcopy(field1)
+
+        field1.non_hiddable_cells = [
+            EntityCellRegularField.build(FakeContact, 'first_name'),
+        ]
+        self.assertListEqual([], field2.non_hiddable_cells)

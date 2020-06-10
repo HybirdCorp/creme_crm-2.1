@@ -1,3 +1,11 @@
+== Version 2.1.5 Work in progress (not released -- this is a draft) ==
+
+  Users side :
+  ------------
+    # A deep-copy bug in 'creme_core.forms.header_filter.EntityCellsField' has been fixed ;
+      it could cause issues with hidden fields when editing list-views views (HeaderFilters).
+
+
 == Version 2.1.4 ==
 
   Users side :

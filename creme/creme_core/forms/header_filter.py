@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -19,6 +19,7 @@
 ################################################################################
 
 from collections import defaultdict
+from copy import deepcopy
 import logging
 
 from django.db.transaction import atomic
@@ -26,18 +27,27 @@ from django.forms.fields import EMPTY_VALUES, Field, ValidationError
 from django.forms.widgets import Widget
 from django.utils.translation import gettext_lazy as _
 
-from ..core.entity_cell import (EntityCellRegularField,
-        EntityCellCustomField, EntityCellFunctionField, EntityCellRelation)
+from ..core.entity_cell import (
+    EntityCellRegularField,
+    EntityCellCustomField,
+    EntityCellFunctionField,
+    EntityCellRelation,
+)
 from ..core import function_field
 from ..gui import listview
-from ..models import (CremeEntity, RelationType, CustomField, EntityCredentials,
-        HeaderFilter, FieldsConfig)
+from ..models import (
+    CremeEntity,
+    RelationType,
+    CustomField,
+    EntityCredentials,
+    HeaderFilter,
+    FieldsConfig,
+)
 from ..utils.id_generator import generate_string_id_and_save
 from ..utils.meta import ModelFieldEnumerator
 from ..utils.unicode_collation import collator
 
 from .base import CremeModelForm
-
 
 logger = logging.getLogger(__name__)
 _RFIELD_PREFIX = EntityCellRegularField.type_id + '-'
@@ -139,6 +149,11 @@ class EntityCellsField(Field):
         self._non_hiddable_cells = []
         self.content_type = content_type
         self.user = None
+
+    def __deepcopy__(self, memo):
+        result = super().__deepcopy__(memo)
+        result._non_hiddable_cells = deepcopy(self._non_hiddable_cells, memo)
+        return result
 
     def _build_4_regularfield(self, model, name):
         return EntityCellRegularField.build(model=model, name=name[len(_RFIELD_PREFIX):])
