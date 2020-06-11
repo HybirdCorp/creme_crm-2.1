@@ -6,6 +6,7 @@
       it could cause issues with hidden fields when editing list-views views (HeaderFilters).
     # Values of decimal CustomFields are now localized in list-views.
     # The error message, when a definitive deletion fails, was partially broken.
+    # The quick global search menu was ugly with very long names.
     # Apps :
         * Reports :
             - The export for some types of CustomField was broken (multi-enum) or not localized (datetime, bool, decimal).
