@@ -11,6 +11,8 @@
         * Reports :
             - The export for some types of CustomField was broken (multi-enum) or not localized (datetime, bool, decimal).
             - Aggregates are now localized in exported reports.
+        * Emails :
+            - The field 'models.MailingList.description' was missing in the forms.
 
 
 == Version 2.1.4 ==
