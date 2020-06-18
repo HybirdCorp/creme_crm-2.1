@@ -97,6 +97,11 @@
 
             $('.ui-dialog-content').dialog('destroy');
             creme.widget.shutdown($('body'));
+
+            if ($('#ui-datepicker-div').length > 0) {
+                console.warn('Some jQuery.datepicker dialogs has not been cleaned up !');
+                $('#ui-datepicker-div').detach();
+            }
         },
 
         createActionHtml: function(options) {
