@@ -16,6 +16,8 @@
             - Aggregates are now localized in exported reports.
         * Emails :
             - The field 'models.MailingList.description' was missing in the forms.
+        * Billing :
+            - The orders of InvoiceStatus were not correct in populate script.
 
 
 == Version 2.1.4 ==
