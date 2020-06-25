@@ -2,7 +2,7 @@
 
 ################################################################################
 #
-# Copyright (c) 2017-2018 Hybird
+# Copyright (c) 2017-2020 Hybird
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,6 @@ import subprocess
 
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import localtime
-
 
 logger = logging.getLogger(__name__)
 
@@ -86,6 +85,57 @@ def get_hg_info():
             else:
                 if date_obj is None:
                     logger.warning('Error in creme_core.utils.version.get_hg_info(): date info is not well formatted (%s)', date_str)
+                else:
+                    info['date'] = localtime(date_obj)
+
+    return info
+
+
+# TODO: factorise ?
+@lru_cache()
+def get_git_info() -> dict:
+    repo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    info = {
+        'date': '?',
+        'id':   '?',
+    }
+
+    git_log = subprocess.Popen(
+        "git log -n 1 --format='%H#%cI'",
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        shell=True, cwd=repo_dir,
+        universal_newlines=True,
+    )
+
+    raw_result, error = git_log.communicate()
+
+    if error:
+        logger.warning('Error in creme_core.utils.version.get_hg_info(): %s', error)
+    else:
+        print(raw_result)
+        try:
+            changeset_id, date_str = raw_result.strip().split('#', 1)
+        except ValueError:
+            logger.warning(
+                'Error in creme_core.utils.version.get_git_info(): '
+                'received: %s', raw_result,
+            )
+        else:
+            info['id'] = changeset_id
+
+            try:
+                date_obj = parse_datetime(date_str)
+            except ValueError as e:
+                logger.warning(
+                    'Error in creme_core.utils.version.get_git_info(): '
+                    'invalid date info (%s)', e
+                )
+            else:
+                if date_obj is None:
+                    logger.warning(
+                        'Error in creme_core.utils.version.get_git_info(): '
+                        'date info is not well formatted (%s)', date_str,
+                    )
                 else:
                     info['date'] = localtime(date_obj)
 
