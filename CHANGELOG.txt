@@ -10,6 +10,7 @@
         - TextFields contained annoying escaped HTML tags.
         - Empty string were not avoided.
     # The quick global search menu was ugly with very long names.
+    # In "About" page, information are retrieved from GIT instead of HG.
     # Apps :
         * Reports :
             - The export for some types of CustomField was broken (multi-enum) or not localized (datetime, bool, decimal).
