@@ -1,15 +1,21 @@
 == Version 2.1.5 Work in progress (not released -- this is a draft) ==
 
+  UPGRADE NOTE :
+    - You should re-generate the media files (python manage.py generatemedia).
+
   Users side :
   ------------
+    # In list-views, the quick-search on date-range was broken.
     # A deep-copy bug in 'creme_core.forms.header_filter.EntityCellsField' has been fixed ;
       it could cause issues with hidden fields when editing list-views views (HeaderFilters).
-    # Values of decimal CustomFields are now localized in list-views.
     # The error message, when a definitive deletion fails, was partially broken.
-    # In list-views or custom blocks, the display of sub-fields for ManyToManyFields was not really nice :
-        - TextFields contained annoying escaped HTML tags.
-        - Empty string were not avoided.
+    # In list-views or custom blocks :
+        - Values of decimal CustomFields are now localized.
+        - The display of sub-fields for ManyToManyFields was not really nice :
+            - TextFields contained annoying escaped HTML tags.
+            - Empty string were not avoided.
     # The quick global search menu was ugly with very long names.
+    # Some edition forms titles were escaped twice, so quote chars were replaced by HTML crap.
     # In "About" page, information are retrieved from GIT instead of HG.
     # Apps :
         * Reports :
@@ -19,6 +25,19 @@
             - The field 'models.MailingList.description' was missing in the forms.
         * Billing :
             - The orders of InvoiceStatus were not correct in populate script.
+
+
+  Developers side :
+  -----------------
+
+    Breaking changes :
+    ------------------
+        # Apps:
+            * Persons & Billing :
+                - These templates do not fill the variable "title" any more :
+                   - "creme/billing/templates/billing/form/edit.html"
+                   - "creme/persons/templates/persons/edit_contact_form.html"
+                   - "creme/persons/templates/persons/edit_organisation_form.html"
 
 
 == Version 2.1.4 ==
