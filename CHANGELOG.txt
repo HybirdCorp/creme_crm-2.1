@@ -1,3 +1,14 @@
+== Version 2.1.6 Work in progress (not released -- this is a draft) ==
+
+  Developers side :
+  -----------------
+    Non breaking changes :
+    ----------------------
+        # Apps:
+            * Billing & Opportunities :
+                - The FunctionFields have been fixed to not mark error message as 'Decimal'.
+
+
 == Version 2.1.5 ==
 
   UPGRADE NOTE :
