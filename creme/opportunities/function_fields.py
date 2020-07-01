@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -20,23 +20,36 @@
 
 from django.utils.translation import gettext_lazy as _, gettext
 
-from creme.creme_core.core import function_field
+from creme.creme_core.core.function_field import (
+    FunctionField,
+    FunctionFieldDecimal,
+    FunctionFieldResult,
+)
 from creme.creme_core.models import FieldsConfig
 
 
-class TurnoverField(function_field.FunctionField):
+class TurnoverField(FunctionField):
     name         = 'get_weighted_sales'
     verbose_name = _('Weighted sales')
-    result_type  = function_field.FunctionFieldDecimal
+    result_type  = FunctionFieldDecimal
 
     def __call__(self, entity, user):
         is_hidden = FieldsConfig.get_4_model(entity.__class__).is_fieldname_hidden
 
+        # if is_hidden('estimated_sales'):
+        #     value = gettext('Error: «Estimated sales» is hidden')
+        # elif is_hidden('chance_to_win'):
+        #     value = gettext(r'Error: «% of chance to win» is hidden')
+        # else:
+        #     value = (entity.estimated_sales or 0) * (entity.chance_to_win or 0) / 100.0
+        #
+        # return self.result_type(value)
         if is_hidden('estimated_sales'):
-            value = gettext('Error: «Estimated sales» is hidden')
-        elif is_hidden('chance_to_win'):
-            value = gettext(r'Error: «% of chance to win» is hidden')
-        else:
-            value = (entity.estimated_sales or 0) * (entity.chance_to_win or 0) / 100.0
+            return FunctionFieldResult(gettext('Error: «Estimated sales» is hidden'))
 
-        return self.result_type(value)
+        if is_hidden('chance_to_win'):
+            return FunctionFieldResult(gettext(r'Error: «% of chance to win» is hidden'))
+
+        return self.result_type(
+            (entity.estimated_sales or 0) * (entity.chance_to_win or 0) / 100.0
+        )
