@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -18,14 +18,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-from collections import defaultdict
 import datetime
 import logging
+from collections import defaultdict
+from decimal import Decimal
 
 from django.utils.translation import gettext_lazy as _, gettext
 
 from creme.creme_core.auth.entity_credentials import EntityCredentials
-from creme.creme_core.core.function_field import FunctionField, FunctionFieldDecimal
+from creme.creme_core.core.function_field import (
+    FunctionField,
+    FunctionFieldDecimal,
+    FunctionFieldResult,
+)
 from creme.creme_core.models import Relation, FieldsConfig
 
 from creme import persons
@@ -208,7 +213,12 @@ class _BaseTotalFunctionField(FunctionField):
         if total is None:
             total = e_cache[user.id] = self.single_func()(entity, user)
 
-        return FunctionFieldDecimal(total)
+        # return FunctionFieldDecimal(total)
+        return (
+            FunctionFieldDecimal(total)
+            if isinstance(total, Decimal) else
+            FunctionFieldResult(total)
+        )
 
     # @classmethod
     # def populate_entities(cls, entities, user):
