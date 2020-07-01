@@ -1,6 +1,7 @@
-== Version 2.1.5 Work in progress (not released -- this is a draft) ==
+== Version 2.1.5 ==
 
   UPGRADE NOTE :
+    - You should upgrade the minor version of Django 2.2 (2.2.14 or more) (eg: pip install -U django==2.2.14).
     - You should re-generate the media files (python manage.py generatemedia).
 
   Users side :
