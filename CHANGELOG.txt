@@ -1,9 +1,15 @@
 == Version 2.1.6 Work in progress (not released -- this is a draft) ==
 
+  User side :
+  -----------
+    # Fix dialog title of entity filter details using "<".
+
   Developers side :
   -----------------
     Non breaking changes :
     ----------------------
+        # In javascript :
+          - title property of creme.dialog.Dialog is now unescaped (see bug #64)
         # Apps:
             * Billing & Opportunities :
                 - The FunctionFields have been fixed to not mark error message as 'Decimal'.
