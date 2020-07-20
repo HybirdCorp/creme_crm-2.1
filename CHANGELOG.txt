@@ -8,11 +8,13 @@
   -----------------
     Non breaking changes :
     ----------------------
-        # In javascript :
-          - title property of creme.dialog.Dialog is now unescaped (see bug #64)
+        # In JavaScript :
+          - The "title" property of 'creme.dialog.Dialog' is now unescaped (see bug #64).
         # Apps:
             * Billing & Opportunities :
                 - The FunctionFields have been fixed to not mark error message as 'Decimal'.
+            * Creme_config :
+                - When a RelationBrickItem instance is deleted, the related BrickStates are deleted too.
 
 
 == Version 2.1.5 ==
