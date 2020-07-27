@@ -8,6 +8,7 @@
             - The LateX templates have been fixed :
                 - The issuing date is now displayed.
                 - In Invoices, the settlement terms set in the entity is now used instead of hard-coded label.
+                - The display of the total (exclusive of tax) for lines has now 2 decimal places.
 
   Developers side :
   -----------------
