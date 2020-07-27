@@ -2,7 +2,12 @@
 
   User side :
   -----------
-    # Fix dialog title of entity filter details using "<".
+    # The title of the dialog for entity filter details using "<" has been fixed.
+    # Apps:
+        * Billing :
+            - The LateX templates have been fixed :
+                - The issuing date is now displayed.
+                - In Invoices, the settlement terms set in the entity is now used instead of hard-coded label.
 
   Developers side :
   -----------------
