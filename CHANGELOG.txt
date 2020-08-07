@@ -1,3 +1,12 @@
+== Version 2.1.7 Work in progress (not released -- this is a draft) ==
+
+  User side :
+  -----------
+    # Apps:
+        * Billing :
+            - The LateX templates have been fixed : the settlement terms is now used correctly.
+
+
 == Version 2.1.6 ==
 
   UPGRADE NOTE :
