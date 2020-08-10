@@ -4,7 +4,9 @@
   -----------
     # Apps:
         * Billing :
-            - The LateX templates have been fixed : the settlement terms is now used correctly.
+            - The LateX templates have been fixed :
+                - the settlement terms is now used correctly.
+                - the currency is now used.
 
 
 == Version 2.1.6 ==
