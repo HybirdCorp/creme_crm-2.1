@@ -40,7 +40,7 @@ setup(
         "redis>=3.3.11,<3.3.1024",
         "Pillow>=7.1.2,<7.1.1024",
         "python-dateutil>=2.8.1,<2.8.1024",
-        "bleach>=3.1.0,<3.1.1024",
+        "bleach>=3.1.5,<3.1.1024",
         "django-formtools==2.1",
     ],
     classifiers=[
