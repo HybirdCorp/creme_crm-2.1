@@ -7,6 +7,7 @@
             - The LateX templates have been fixed :
                 - the settlement terms is now used correctly.
                 - the currency is now used.
+            - In the block "Payments information", the button to select an account is always displayed when no account is selected.
 
 
 == Version 2.1.6 ==
