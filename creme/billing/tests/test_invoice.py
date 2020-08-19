@@ -29,7 +29,12 @@ try:
         REL_SUB_BILL_RECEIVED, REL_OBJ_BILL_RECEIVED,
         AMOUNT_PK, PERCENT_PK,
     )
-    from ..models import InvoiceStatus, AdditionalInformation, PaymentTerms
+    from ..models import (
+        AdditionalInformation,
+        InvoiceStatus,
+        PaymentInformation,
+        PaymentTerms,
+    )
 
     from .base import (
         _BillingTestCase, _BillingTestCaseMixin,
@@ -67,6 +72,7 @@ class InvoiceTestCase(_BillingTestCase):
         self.assertEqual(currency, invoice.currency)
         self.assertEqual(date(year=2010, month=10, day=13), invoice.expiration_date)
         self.assertEqual('', invoice.description)
+        self.assertIsNone(invoice.payment_info)
         self.assertEqual('', invoice.buyers_order_number)
 
         self.assertRelationCount(1, invoice, REL_SUB_BILL_ISSUED,       source)
@@ -187,6 +193,34 @@ class InvoiceTestCase(_BillingTestCase):
         self.assertFormError(response, 'form', 'target',
                              link_error.format(not_viewable_error(id=target.id))
                             )
+
+    def test_createview_payment_info01(self):
+        "One PaymentInformation in the source => used automatically."
+        user = self.login()
+
+        create_orga = partial(Organisation.objects.create, user=user)
+        source = create_orga(name='Source Orga')
+        target = create_orga(name='Target Orga')
+
+        pi = PaymentInformation.objects.create(organisation=source, name='RIB 1')
+
+        invoice = self.create_invoice('Invoice001', source, target)
+        self.assertEqual(pi, invoice.payment_info)
+
+    def test_createview_payment_info02(self):
+        "Two PaymentInformation in the source => not used."
+        user = self.login()
+
+        create_orga = partial(Organisation.objects.create, user=user)
+        source = create_orga(name='Source Orga')
+        target = create_orga(name='Target Orga')
+
+        create_pi = partial(PaymentInformation.objects.create, organisation=source)
+        create_pi(name='RIB 1')
+        create_pi(name='RIB 2')
+
+        invoice = self.create_invoice('Invoice001', source, target)
+        self.assertIsNone(invoice.payment_info)
 
     def test_create_related01(self):
         user = self.login()
@@ -430,6 +464,7 @@ class InvoiceTestCase(_BillingTestCase):
         invoice = self.refresh(invoice)
         self.assertEqual(name, invoice.name)
         self.assertEqual(date(year=2011, month=11, day=14), invoice.expiration_date)
+        self.assertIsNone(invoice.payment_info)
 
         self.assertEqual(source, invoice.get_source().get_real_entity())
         self.assertEqual(target, invoice.get_target().get_real_entity())
@@ -511,6 +546,91 @@ class InvoiceTestCase(_BillingTestCase):
         msg = _('Enter a number between 0 and 100 (it is a percentage).')
         self.assertFormError(post('150'), 'form', 'discount', msg)
         self.assertFormError(post('-10'), 'form', 'discount', msg)
+
+    def test_editview_payment_info01(self):
+        user = self.login()
+
+        source2 = Organisation.objects.create(user=user, name='Sega')
+        invoice, source1, target = self.create_invoice_n_orgas('Playstations')
+
+        pi_sony = PaymentInformation.objects.create(
+            organisation=source1, name='RIB sony',
+        )
+        invoice.payment_info = pi_sony
+        invoice.save()
+
+        currency = Currency.objects.all()[0]
+        response = self.client.post(
+            invoice.get_edit_absolute_url(), follow=True,
+            data={
+                'user':            user.id,
+                'name':            'Dreamcast',
+                'issuing_date':    '2010-9-7',
+                'expiration_date': '2010-10-13',
+                'status':          1,
+                'currency':        currency.pk,
+                'discount':        Decimal(),
+                'source':          source2.id,
+                'target':          self.formfield_value_generic_entity(target),
+            },
+        )
+        self.assertNoFormError(response)
+        self.assertIsNone(self.refresh(invoice).payment_info)
+
+    def test_editview_payment_info02(self):
+        "One PaymentInformation in the source => used automatically."
+        user = self.login()
+
+        invoice, source, target = self.create_invoice_n_orgas('Invoice001')
+        pi = PaymentInformation.objects.create(organisation=source, name='RIB 1')
+
+        response = self.client.post(
+            invoice.get_edit_absolute_url(), follow=True,
+            data={
+                'user':   user.pk,
+                'name':   invoice.name,
+                'status': invoice.status.id,
+
+                'currency': invoice.currency.id,
+                'discount': invoice.discount,
+
+                'source': source.id,
+                'target': self.formfield_value_generic_entity(target),
+            },
+        )
+        self.assertNoFormError(response)
+
+        invoice = self.refresh(invoice)
+        self.assertEqual(pi, invoice.payment_info)
+
+    def test_editview_payment_info03(self):
+        "Two PaymentInformation in the source => not used."
+        user = self.login()
+
+        invoice, source, target = self.create_invoice_n_orgas('Invoice001')
+
+        create_pi = partial(PaymentInformation.objects.create, organisation=source)
+        create_pi(name='RIB 1')
+        create_pi(name='RIB 2')
+
+        response = self.client.post(
+            invoice.get_edit_absolute_url(), follow=True,
+            data={
+                'user':   user.pk,
+                'name':   invoice.name,
+                'status': invoice.status.id,
+
+                'currency': invoice.currency.id,
+                'discount': invoice.discount,
+
+                'source': source.id,
+                'target': self.formfield_value_generic_entity(target),
+            },
+        )
+        self.assertNoFormError(response)
+
+        invoice = self.refresh(invoice)
+        self.assertIsNone(invoice.payment_info)
 
     def test_inner_edit01(self):
         user = self.login()

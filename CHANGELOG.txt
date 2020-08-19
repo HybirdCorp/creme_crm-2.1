@@ -4,6 +4,7 @@
   -----------
     # Apps:
         * Billing :
+            - When a billing document is created/edited, & the source has exactly one PaymentInformation, this one is automatically linked to the document.
             - The LateX templates have been fixed :
                 - the settlement terms is now used correctly.
                 - the currency is now used.
