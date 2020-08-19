@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -44,6 +44,47 @@ class PaymentInformationCreation(generic.AddingInstanceToEntityPopup):
     entity_id_url_kwarg = 'orga_id'
     entity_classes = get_organisation_model()
     title = _('New payment information in the organisation «{entity}»')
+
+
+class PaymentInformationRelatedCreation(generic.AddingInstanceToEntityPopup):
+    model = PaymentInformation
+    form_class = pi_forms.PaymentInformationCreateForm
+    permissions = 'billing'
+    entity_classes = [
+        billing.get_invoice_model(),
+        billing.get_quote_model(),
+        billing.get_sales_order_model(),
+        billing.get_credit_note_model(),
+        billing.get_template_base_model(),
+    ]
+    title = _('New payment information in the organisation «{entity}»')
+
+    def check_related_entity_permissions(self, entity, user):
+        super().check_related_entity_permissions(entity=entity, user=user)
+        user.has_perm_to_change_or_die(entity.get_source())
+
+    def get_title_format_data(self):
+        data = super().get_title_format_data()
+        # data['entity'] = self.get_related_entity().allowed_str(self.request.user)
+        data['entity'] = self.get_related_entity().get_source().allowed_str(self.request.user)
+
+        return data
+
+    def set_entity_in_form_kwargs(self, form_kwargs):
+        entity = self.get_related_entity()
+
+        if self.entity_form_kwarg:
+            # form_kwargs[self.entity_form_kwarg] = entity
+            form_kwargs[self.entity_form_kwarg] = entity.get_source().get_real_entity()
+
+    def form_valid(self, form):
+        self.object = pi = form.save()
+
+        entity = self.get_related_entity()
+        entity.payment_info = pi
+        entity.save()
+
+        return HttpResponse(self.get_success_url(), content_type='text/plain')
 
 
 class PaymentInformationEdition(generic.RelatedToEntityEditionPopup):
@@ -95,6 +136,7 @@ class PaymentInformationEdition(generic.RelatedToEntityEditionPopup):
 #     return {}
 class PaymentInformationAsDefault(generic.base.EntityRelatedMixin, generic.CheckedView):
     permissions = 'billing'
+    # TODO: factorise
     entity_classes = [
         billing.get_invoice_model(),
         billing.get_quote_model(),
