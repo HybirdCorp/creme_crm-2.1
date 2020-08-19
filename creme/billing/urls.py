@@ -16,16 +16,24 @@ urlpatterns = [
     re_path(r'^generate_pdf/(?P<base_id>\d+)[/]?$', export.export_as_pdf, name='billing__export'),
 
     re_path(r'^payment_information/', include([
-        re_path(r'^add/(?P<orga_id>\d+)[/]?$',
+        re_path(
+            r'^add/(?P<orga_id>\d+)[/]?$',
             payment_information.PaymentInformationCreation.as_view(),
             name='billing__create_payment_info',
         ),
-        re_path(r'^edit/(?P<pinfo_id>\d+)[/]?$',
+        re_path(
+            r'^add_related/(?P<entity_id>\d+)[/]?$',
+            payment_information.PaymentInformationRelatedCreation.as_view(),
+            name='billing__create_related_payment_info',
+        ),
+        re_path(
+            r'^edit/(?P<pinfo_id>\d+)[/]?$',
             payment_information.PaymentInformationEdition.as_view(),
             name='billing__edit_payment_info',
         ),
-        # re_path(r'^set_default/(?P<payment_information_id>\d+)/(?P<billing_id>\d+)[/]?$',
-        re_path(r'^set_default/(?P<pinfo_id>\d+)/(?P<entity_id>\d+)[/]?$',
+        re_path(
+            # r'^set_default/(?P<payment_information_id>\d+)/(?P<billing_id>\d+)[/]?$',
+            r'^set_default/(?P<pinfo_id>\d+)/(?P<entity_id>\d+)[/]?$',
             # payment_information.set_default,
             payment_information.PaymentInformationAsDefault.as_view(),
             name='billing__set_default_payment_info',
