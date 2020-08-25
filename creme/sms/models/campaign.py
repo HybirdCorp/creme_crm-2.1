@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -22,6 +22,7 @@ from django.conf import settings
 from django.db.models import CharField, ManyToManyField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import pgettext_lazy
 
 from creme.creme_core.models import CremeEntity
 
@@ -32,9 +33,8 @@ class AbstractSMSCampaign(CremeEntity):
     name  = CharField(_('Name of the campaign'), max_length=100)
     lists = ManyToManyField(settings.SMS_MLIST_MODEL, verbose_name=_('Related messaging lists'), blank=True)
 
-    # TODO: pgettext (BUT beware because PreferredMenuItem does not manage context currently...)
-    creation_label = _('Create a campaign')
-    save_label     = _('Save the campaign')
+    creation_label = pgettext_lazy('sms', 'Create a campaign')
+    save_label     = pgettext_lazy('sms', 'Save the campaign')
 
     class Meta:
         abstract = True
@@ -69,21 +69,25 @@ class AbstractSMSCampaign(CremeEntity):
 
         super().delete(*args, **kwargs)
 
-    def all_recipients(self):
+    # def all_recipients(self):
+    def all_phone_numbers(self):
         mlists = self.lists.filter(is_deleted=False)
 
-        # TODO: remove duplicates
-        # Manual recipients
-        recipients = [number for number in Recipient.objects.filter(messaging_list__in=mlists)
-                                                            .values_list('phone', flat=True)
-                     ]
+        # Manual numbers
+        recipients = {
+            number
+            for number in Recipient.objects
+                                   .filter(messaging_list__in=mlists)
+                                   .values_list('phone', flat=True)
+        }
 
-        # Contacts recipients
-        recipients.extend(contact.mobile 
-                            for mlist in mlists 
-                                for contact in mlist.contacts.filter(is_deleted=False)
-                                    if contact.mobile
-                         )
+        # Contacts number
+        recipients.update(
+            contact.mobile
+            for mlist in mlists
+            for contact in mlist.contacts.filter(is_deleted=False)
+            if contact.mobile
+        )
 
         return recipients
 

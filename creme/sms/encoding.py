@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2010  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -18,12 +18,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-LF = '\x0a'
+LF = b'\x0a'  # XX: not used ?!
 # CR = '\x0d'
 # FF = '\x0c'
 # EC = '\x1b'
 # PA = '\x80'
-EURO = '\x84'
+EURO = b'\x84'
 
 # SMS_ENCODING_GSM_03_38 = ''.join(
 #    (
@@ -47,17 +47,16 @@ EURO = '\x84'
 #    ))
 
 SMS_EXTENDED_CHARS = {
-     '^':  '\x1b\x14',
-     '{':  '\x1b\x28',
-     '}':  '\x1b\x29',
-     '\\': '\x1b\x2f',
-     '[':  '\x1b\x3c',
-     '~':  '\x1b\x3d',
-     ']':  '\x1b\x3e',
-     '|':  '\x1b\x40',
-     EURO: '\x1b\x65',
+    b'^':  b'\x1b\x14',
+    b'{':  b'\x1b\x28',
+    b'}':  b'\x1b\x29',
+    b'\\': b'\x1b\x2f',
+    b'[':  b'\x1b\x3c',
+    b'~':  b'\x1b\x3d',
+    b']':  b'\x1b\x3e',
+    b'|':  b'\x1b\x40',
+    EURO:  b'\x1b\x65',
 }
-
 SMS_MAX_LENGTH = 160
 
 
@@ -66,9 +65,12 @@ def gsm_encoded_content(content):
 
     #print ['0x%02x' % ord(char) for char in unicode_encoded]
 
-    # convert euro sign (allow iso convertion) and \n as \x7f
+    # Convert euro sign (allow ISO conversion) and \n as \x7f
     # unicode_encoded = unicode_encoded.translate({0x20ac:0x84, 0x0a:0x7f})
-    unicode_encoded = content.translate({0x20ac: 0x84, 0x0a: 0x7f})
+    unicode_encoded = content.translate({
+        0x20ac: 0x84,  # € => '\x84'
+        0x0a: 0x7f,    # \n => '\x7f'
+    })
 
     #print ['0x%02x' % ord(char) for char in unicode_encoded]
 

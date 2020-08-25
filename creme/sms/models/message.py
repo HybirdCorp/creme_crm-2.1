@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -24,7 +24,7 @@ from django.utils.formats import date_format
 from django.utils.translation import gettext_lazy as _, gettext, pgettext, pgettext_lazy
 
 from creme.creme_core.models import CremeModel
-from creme.creme_core.utils import chunktools
+from creme.creme_core.utils import chunktools, ellipsis
 
 from ..webservice.samoussa import (SamoussaBackEnd, SAMOUSSA_STATUS_ACCEPT,
         SAMOUSSA_STATUS_WAITING, SAMOUSSA_STATUS_SENT,
@@ -48,12 +48,18 @@ MESSAGE_STATUS = {
 
 
 class Sending(CremeModel):
-    date     = DateField(_('Date'))
-    campaign = ForeignKey(settings.SMS_CAMPAIGN_MODEL, on_delete=CASCADE,
-                          verbose_name=_('Related campaign'), related_name='sendings',
-                         )
-    template = ForeignKey(settings.SMS_TEMPLATE_MODEL, verbose_name=_('Message template'), on_delete=CASCADE)  # TODO: PROTECT ? copy data like in 'emails' ?
-    content  = TextField(_('Generated message'), max_length=160)
+    date = DateField(_('Date'), editable=False)
+    campaign = ForeignKey(
+        settings.SMS_CAMPAIGN_MODEL, on_delete=CASCADE,
+        verbose_name=_('Related campaign'), related_name='sendings',
+        editable=False,
+    )
+    template = ForeignKey(
+        settings.SMS_TEMPLATE_MODEL,
+        verbose_name=_('Message template'), on_delete=CASCADE,
+        editable=False,
+    )  # TODO: PROTECT ? copy data like in 'emails' ?
+    content = TextField(_('Generated message'), max_length=160, editable=False)
 
     creation_label = pgettext_lazy('sms', 'Create a sending')
     save_label     = pgettext_lazy('sms', 'Save the sending')
@@ -69,6 +75,14 @@ class Sending(CremeModel):
                     date=date_format(self.date, 'DATE_FORMAT'),
                )
 
+    def delete(self, *args, **kwargs):
+        ws = SamoussaBackEnd()  # TODO: 'with'
+        ws.connect()
+        ws.delete_messages(user_data=self.id)
+        ws.close()
+
+        return super().delete(*args, **kwargs)
+
     def formatstatus(self):
         # TODO: use <Conditional aggregation> to perform only one query
         items = ((self.messages.filter(status=status).count(), status_name)
@@ -78,14 +92,8 @@ class Sending(CremeModel):
                             for count, label in items if count > 0)
                         )
 
-    def delete(self, *args, **kwargs):
-        ws = SamoussaBackEnd()  # TODO: 'with'
-        ws.connect()
-        ws.delete_messages(user_data=self.id)
-        ws.close()
-
-        # self.messages.all().delete()
-        return super().delete(*args, **kwargs)
+    def get_related_entity(self):  # For generic views
+        return self.campaign
 
 
 # TODO: keep the related entity (to hide the number when the entity is not viewable)
@@ -100,8 +108,8 @@ class Message(CremeModel):
 
     class Meta:
         app_label = 'sms'
-        verbose_name = _('Message')
-        verbose_name_plural = _('Messages')
+        verbose_name = pgettext_lazy('sms', 'Message')
+        verbose_name_plural = pgettext_lazy('sms', 'Messages')
 
     # TODO: improve delete() method & remove the view delete_message ?
     # def get_related_entity(self):  # For generic views (deletion)
@@ -111,14 +119,20 @@ class Message(CremeModel):
         status_desc = MESSAGE_STATUS.get(self.status)
         return status_desc[0] if status_desc else gettext('Unknown')
 
-    @staticmethod
-    def _connect(sending):
+    # @staticmethod
+    @classmethod
+    # def _connect(sending):
+    def _connect(cls, sending):
         ws = SamoussaBackEnd()
 
         try:
             ws.connect()
         except WSException as err:
-            sending.messages.filter(status=MESSAGE_STATUS_NOTSENT).update(status_message=str(err))
+            msg = ellipsis(
+                str(err),
+                length=cls._meta.get_field('status_message').max_length,
+            )
+            sending.messages.filter(status=MESSAGE_STATUS_NOTSENT).update(status_message=msg)
             return None
 
         return ws
@@ -130,9 +144,12 @@ class Message(CremeModel):
         except WSException:
             pass
 
-    @staticmethod
-    def _do_action(sending, request, action, step):
-        ws = Message._connect(sending)
+    # @staticmethod
+    @classmethod
+    # def _do_action(sending, request, action, step):
+    def _do_action(cls, sending, request, action, step):
+        # ws = Message._connect(sending)
+        ws = cls._connect(sending)
 
         if not ws:
             return
@@ -141,7 +158,8 @@ class Message(CremeModel):
         for chunk in chunktools.iter_as_slices(request, 256):
             action(ws, sending, chunk)
 
-        Message._disconnect(ws)
+        # Message._disconnect(ws)
+        cls._disconnect(ws)
 
     # @staticmethod
     @classmethod
