@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -18,7 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-from django.forms import ValidationError
+from django.db.models.query import Q
+# from django.forms import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from creme.creme_core.forms import CremeEntityForm, CremeForm, FieldBlockManager
@@ -44,30 +45,33 @@ class CampaignEditForm(CremeEntityForm):
 class CampaignAddListForm(CremeForm):
     messaging_lists = MultiCreatorEntityField(label=_('Lists'), required=False, model=MessagingList)
 
-    error_messages = {
-        'already_linked': _('Following lists are already related to this campaign: %(lists)s'),
-    }
+    # error_messages = {
+    #     'already_linked': _('Following lists are already related to this campaign: %(lists)s'),
+    # }
 
     blocks = FieldBlockManager(('general', _('Messaging lists'), '*'))
 
     def __init__(self, entity, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.campaign = entity
+        self.fields['messaging_lists'].q_filter = ~Q(
+            id__in=[*entity.lists.values_list('id', flat=True)],
+        )
 
-    # In fact duplicate is not a problem with django's m2m
-    def clean_lists(self):
-        messaging_lists = self.cleaned_data['messaging_lists']
-        current_lists   = frozenset(self.campaign.lists.values_list('pk', flat=True))
-        duplicate       = [mlist for mlist in messaging_lists if mlist.id in current_lists]
-
-        if duplicate:
-            raise ValidationError(
-                self.error_messages['already_linked'],
-                params={'lists': ', '.join(mlist.name for mlist in duplicate)},
-                code='already_linked',
-            )
-
-        return messaging_lists
+    # # In fact duplicate is not a problem with django's m2m
+    # def clean_lists(self):
+    #     messaging_lists = self.cleaned_data['messaging_lists']
+    #     current_lists   = frozenset(self.campaign.lists.values_list('pk', flat=True))
+    #     duplicate       = [mlist for mlist in messaging_lists if mlist.id in current_lists]
+    #
+    #     if duplicate:
+    #         raise ValidationError(
+    #             self.error_messages['already_linked'],
+    #             params={'lists': ', '.join(mlist.name for mlist in duplicate)},
+    #             code='already_linked',
+    #         )
+    #
+    #     return messaging_lists
 
     def save(self):
         add_mlist = self.campaign.lists.add
