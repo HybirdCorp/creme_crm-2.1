@@ -5,6 +5,7 @@
     # Apps:
         * Projects :
             - The field 'Project.effective_end_date' cannot be inner-edited anymore (use the button 'Close the project').
+            - In the forms for 'AbstractProject', the fields "start_date" & "end_date" are not required any more.
 
 
 == Version 2.1.7 ==
