@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -20,7 +20,7 @@
 
 from functools import partial
 
-from django.forms import DateTimeField
+# from django.forms import DateTimeField
 from django.utils.translation import gettext_lazy as _
 
 from creme.creme_core.forms import CremeEntityForm, MultiCreatorEntityField
@@ -33,8 +33,8 @@ from ..constants import REL_OBJ_PROJECT_MANAGER
 
 
 class ProjectEditForm(CremeEntityForm):
-    start_date = DateTimeField(label=_('Start date'), required=True)  # TODO: not required in the model !
-    end_date   = DateTimeField(label=_('End date'), required=True)
+    # start_date = DateTimeField(label=_('Start date'), required=True)
+    # end_date   = DateTimeField(label=_('End date'), required=True)
 
     class Meta(CremeEntityForm.Meta):
         model = get_project_model()
