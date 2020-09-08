@@ -1,3 +1,12 @@
+== Version 2.1.8 Work in progress (not released -- this is a draft) ==
+
+  User side :
+  -----------
+    # Apps:
+        * Projects :
+            - The field 'Project.effective_end_date' cannot be inner-edited anymore (use the button 'Close the project').
+
+
 == Version 2.1.7 ==
 
   UPGRADE NOTE :
