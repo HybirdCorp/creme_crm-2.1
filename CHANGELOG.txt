@@ -2,6 +2,7 @@
 
   User side :
   -----------
+    # A crash with filters containing a relationship-condition referencing an entity has been fixed.
     # Apps:
         * Projects :
             - The field 'Project.effective_end_date' cannot be inner-edited anymore (use the button 'Close the project').
