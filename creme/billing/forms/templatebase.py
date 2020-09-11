@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -28,9 +28,10 @@ from .base import BaseEditForm, copy_or_create_address, first_managed_orga_id
 class _TemplateBaseForm(BaseEditForm):
     status = ChoiceField(label=_('Status'), choices=())
 
-    class Meta:
+    # class Meta:
+    class Meta(BaseEditForm.Meta):
         model = get_template_base_model()
-        exclude = (*BaseEditForm.Meta.exclude, 'ct', 'status_id')
+        # exclude = (*BaseEditForm.Meta.exclude, 'ct', 'status_id')
 
     def _build_status_field(self, billing_ct):
         meta = billing_ct.model_class()._meta
