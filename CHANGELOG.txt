@@ -8,6 +8,8 @@
             - The field 'Project.effective_end_date' cannot be inner-edited anymore (use the button 'Close the project').
             - In the forms for 'AbstractProject', the fields "start_date" & "end_date" are not required any more.
             - The button "Back to the project" has been fixed.
+        * Creme_config :
+            - Some icons have ben fixed.
 
 
 == Version 2.1.7 ==
