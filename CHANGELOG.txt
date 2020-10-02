@@ -11,6 +11,8 @@
             - The display of the hourly cost in the Resources' brick has been fixed.
         * Creme_config :
             - Some icons have ben fixed.
+        * SMS:
+            - The field "description" was missing in the form for messaging list.
 
 
 == Version 2.1.7 ==
