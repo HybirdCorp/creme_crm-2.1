@@ -13,6 +13,7 @@
             - Some icons have ben fixed.
         * SMS:
             - The field "description" was missing in the form for messaging list.
+            - The field 'MessagingList.contacts' cannot be inner-edited anymore.
 
 
 == Version 2.1.7 ==
