@@ -4,6 +4,7 @@ try:
     from datetime import date, timedelta
     from functools import partial
 
+    from django.conf import settings
     from django.contrib.contenttypes.models import ContentType
     from django.utils.translation import gettext as _
 
@@ -38,13 +39,16 @@ class TemplateBaseTestCase(_BillingTestCase):
         self.source = create_orga(name='Source')
         self.target = create_orga(name='Target')
 
-    def _create_templatebase(self, model, status_id, comment=''):
+    # def _create_templatebase(self, model, status_id, comment=''):
+    def _create_templatebase(self, model, status_id, comment='', **kwargs):
         user = self.user
-        tpl = TemplateBase.objects.create(user=user,
-                                          ct=ContentType.objects.get_for_model(model),
-                                          status_id=status_id,
-                                          comment=comment,
-                                         )
+        tpl = TemplateBase.objects.create(
+            user=user,
+            ct=ContentType.objects.get_for_model(model),
+            status_id=status_id,
+            comment=comment,
+            **kwargs
+        )
 
         create_rel = partial(Relation.objects.create, user=user, subject_entity=tpl)
         create_rel(type_id=REL_SUB_BILL_ISSUED,   object_entity=self.source)
@@ -119,11 +123,18 @@ class TemplateBaseTestCase(_BillingTestCase):
     def test_create_invoice01(self):
         invoice_status = self.get_object_or_fail(InvoiceStatus, pk=3)
         comment = '*Insert a comment here*'
-        tpl = self._create_templatebase(Invoice, invoice_status.id, comment)
+        # tpl = self._create_templatebase(Invoice, invoice_status.id, comment)
+        #
+        # tpl.additional_info = AdditionalInformation.objects.all()[0]
+        # tpl.payment_terms = PaymentTerms.objects.all()[0]
+        # tpl.save()
+        tpl = self._create_templatebase(
+            Invoice, invoice_status.id, comment,
+            additional_info=AdditionalInformation.objects.all()[0],
+            payment_terms=PaymentTerms.objects.all()[0],
+        )
 
-        tpl.additional_info = AdditionalInformation.objects.all()[0]
-        tpl.payment_terms = PaymentTerms.objects.all()[0]
-        tpl.save()
+        self.assertEqual('', tpl.number)
 
         with self.assertNoException():
             invoice = tpl.create_entity()
@@ -136,7 +147,7 @@ class TemplateBaseTestCase(_BillingTestCase):
         self.assertEqual(self.source, invoice.get_source().get_real_entity())
         self.assertEqual(self.target, invoice.get_target().get_real_entity())
 
-        self.assertIsNotNone(invoice.number)
+        self.assertEqual('0', invoice.number)
         self.assertEqual(date.today(), invoice.issuing_date)
         self.assertEqual(invoice.issuing_date + timedelta(days=30), invoice.expiration_date)
 
@@ -152,6 +163,43 @@ class TemplateBaseTestCase(_BillingTestCase):
             invoice = tpl.create_entity()
 
         self.assertEqual(1, invoice.status_id)
+
+    @skipIfCustomInvoice
+    def test_create_invoice03(self):
+        "Source is managed."
+        source = self.source
+        source.is_managed = True
+        source.save()
+
+        invoice_status = self.get_object_or_fail(InvoiceStatus, pk=3)
+
+        tpl = self._create_templatebase(Invoice, invoice_status.id)
+        self.assertEqual('', tpl.number)
+
+        with self.assertNoException():
+            invoice = tpl.create_entity()
+
+        self.assertIsInstance(invoice, Invoice)
+
+        # TODO: assertStartsWith
+        number = invoice.number
+        prefix = settings.INVOICE_NUMBER_PREFIX
+        self.assertTrue(
+            number.startswith(prefix),
+            '{} does not start with {}.'.format(number, prefix)
+        )
+
+    @skipIfCustomInvoice
+    def test_create_invoice04(self):
+        "Source is not managed + fallback number."
+        invoice_status = self.get_object_or_fail(InvoiceStatus, pk=3)
+        number = 'INV132'
+        tpl = self._create_templatebase(Invoice, invoice_status.id, number=number)
+
+        with self.assertNoException():
+            invoice = tpl.create_entity()
+
+        self.assertEqual(number, invoice.number)
 
     @skipIfCustomQuote
     def test_create_quote01(self):

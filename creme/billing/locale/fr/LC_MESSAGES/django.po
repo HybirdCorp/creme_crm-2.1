@@ -1,5 +1,5 @@
 # FR LOCALISATION OF 'BILLING' APP
-# Copyright (C) 2019 Hybird
+# Copyright (C) 2020 Hybird
 # This file is distributed under the same license as the Creme package.
 #
 # > django-admin.py makemessages -l fr -i "tests/*"
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Billing 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-07 18:13+0200\n"
+"POT-Creation-Date: 2020-10-07 14:35+0200\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -205,32 +205,40 @@ msgstr "Pourcentage"
 msgid "Amount"
 msgstr "Montant"
 
-#: forms/base.py:53 forms/mass_import.py:60
+#: forms/base.py:54 forms/mass_import.py:60
 #: templates/billing/bricks/target.html:23
 msgctxt "billing"
 msgid "Source organisation"
 msgstr "Société émettrice"
 
-#: forms/base.py:54 forms/mass_import.py:65
+#: forms/base.py:55 forms/mass_import.py:65
 msgctxt "billing"
 msgid "Target"
 msgstr "Cible"
 
-#: forms/base.py:60
+#: forms/base.py:61
 msgid "Overall discount (in %)"
 msgstr "Remise globale (en %)"
 
-#: forms/base.py:64
+#: forms/base.py:65
 msgid "Organisations"
 msgstr "Sociétés"
 
-#: forms/base.py:149 forms/mass_import.py:96 forms/mass_import.py:122
-#: forms/templatebase.py:72 models/base.py:57
+#: forms/base.py:154
+msgid ""
+"If you chose an organisation managed by Creme (like «{}») as source "
+"organisation, a number will be automatically generated."
+msgstr ""
+"Si vous choisissez une société gérée par Creme (comme «{}») en tant "
+"qu'émettrice,un nombre sera automatiquement généré."
+
+#: forms/base.py:168 forms/mass_import.py:96 forms/mass_import.py:122
+#: forms/templatebase.py:79 models/base.py:57
 msgid "Billing address"
 msgstr "Adresse de facturation"
 
-#: forms/base.py:150 forms/mass_import.py:97 forms/mass_import.py:127
-#: forms/templatebase.py:73 models/base.py:62
+#: forms/base.py:169 forms/mass_import.py:97 forms/mass_import.py:127
+#: forms/templatebase.py:80 models/base.py:62
 msgid "Shipping address"
 msgstr "Adresse de livraison"
 
@@ -330,31 +338,39 @@ msgid "In update mode, update the shipping address from the target."
 msgstr ""
 "En mode mise-à-jour, mettre à jour l'adresse de livraison depuis la cible."
 
-#: forms/templatebase.py:29 function_fields.py:46
+#: forms/templatebase.py:29 function_fields.py:51
 #: templates/billing/bricks/credit-notes.html:19
 #: templates/billing/bricks/received-billing-documents.html:17
 #: templates/billing/bricks/received-invoices.html:25
 msgid "Status"
 msgstr "Statut"
 
-#: forms/templatebase.py:39
+#: forms/templatebase.py:37
+msgid ""
+"If a number is given, it will be only used as fallback value when generating "
+"a number in the final recurring entities."
+msgstr ""
+"Si un nombre est donné, il sera seulement utilisé comme valeur de secours "
+"lors de la génération du nombre des fiches récurrentes finales."
+
+#: forms/templatebase.py:46
 msgid "Status of {}"
 msgstr "Statut de {}"
 
-#: function_fields.py:142 function_fields.py:152 function_fields.py:164
-#: function_fields.py:175
+#: function_fields.py:147 function_fields.py:157 function_fields.py:169
+#: function_fields.py:180
 msgid "Error: «Acceptation date» is hidden"
 msgstr "Erreur: «Date d'acceptation» est caché"
 
-#: function_fields.py:247 templates/billing/bricks/persons-statistics.html:25
+#: function_fields.py:257 templates/billing/bricks/persons-statistics.html:25
 msgid "Total Pending Payment"
 msgstr "Total des paiements en attente"
 
-#: function_fields.py:261 templates/billing/bricks/persons-statistics.html:21
+#: function_fields.py:271 templates/billing/bricks/persons-statistics.html:21
 msgid "Total Won Quote This Year"
 msgstr "Total des Devis remportés cette année"
 
-#: function_fields.py:275 templates/billing/bricks/persons-statistics.html:17
+#: function_fields.py:285 templates/billing/bricks/persons-statistics.html:17
 msgid "Total Won Quote Last Year"
 msgstr "Total des Devis remportés l'année dernière"
 
@@ -484,27 +500,27 @@ msgstr "Unité"
 msgid "Discount Unit"
 msgstr "Unité de remise"
 
-#: models/line.py:67
+#: models/line.py:68
 msgid "Total discount ?"
 msgstr "Remise totale ?"
 
-#: models/line.py:68 templates/billing/bricks/frags/line-fields.html:10
+#: models/line.py:69 templates/billing/bricks/frags/line-fields.html:10
 msgid "VAT"
 msgstr "TVA"
 
-#: models/line.py:72
+#: models/line.py:73
 msgid "Create a line"
 msgstr "Créer une ligne"
 
-#: models/line.py:81
+#: models/line.py:82
 msgid "Line"
 msgstr "Ligne"
 
-#: models/line.py:82
+#: models/line.py:83
 msgid "Lines"
 msgstr "Lignes"
 
-#: models/line.py:101
+#: models/line.py:103
 msgid ""
 "If you choose % for your discount unit, your discount must be between 1 and "
 "100%"
@@ -512,23 +528,23 @@ msgstr ""
 "Si vous choisissez une remise globale en pourcentage (%), sa valeur doit se "
 "situer entre 1 et 100%"
 
-#: models/line.py:109
+#: models/line.py:111
 msgid ""
 "Your overall discount is superior than the total line (unit price * quantity)"
 msgstr ""
 "Votre remise globale est supérieur au total HT de la ligne (Prix unitaire x "
 "Quantité)"
 
-#: models/line.py:117
+#: models/line.py:119
 msgid "Your discount is superior than the unit price"
 msgstr "Votre remise est supérieur au prix unitaire du produit/service"
 
-#: models/line.py:124
+#: models/line.py:126
 msgid "You cannot set an on the fly name to a line with a related item"
 msgstr ""
 "Vous ne pouvez pas modifier le nom à la volée d'une ligne ayant un item relié"
 
-#: models/line.py:131
+#: models/line.py:133
 msgid "You must define a name for an on the fly item"
 msgstr "Vous devez donner un nom à votre produit/service à la volée"
 
@@ -648,7 +664,7 @@ msgid "RIB key"
 msgstr "Clé RIB"
 
 #: models/other_models.py:134
-#: templates/billing/bricks/billing-payment-information.html:41
+#: templates/billing/bricks/billing-payment-information.html:39
 #: templates/billing/bricks/orga-payment-information.html:47
 msgid "Banking domiciliation"
 msgstr "Domiciliation"
@@ -1033,23 +1049,23 @@ msgctxt "billing"
 msgid "Template information"
 msgstr "Informations sur le patron de document"
 
-#: populate.py:472
+#: populate.py:476
 msgid "All invoices of the current year"
 msgstr "Toutes les factures de l'année en cours"
 
-#: populate.py:478
+#: populate.py:482
 msgid "Sum of current year invoices total without taxes / month"
 msgstr "Somme des totaux HT des factures de l'année en cours / mois"
 
-#: populate.py:484
+#: populate.py:488
 msgid "Sum of current year invoices total without taxes / invoices status"
 msgstr "Somme des totaux HT des factures de l'année en cours / statut"
 
-#: populate.py:494
+#: populate.py:498
 msgid "Invoices unpaid of the current year"
 msgstr "Factures impayées de l'année en cours"
 
-#: populate.py:500
+#: populate.py:504
 msgid "Sum of current year and unpaid invoices total without taxes / month"
 msgstr "Somme des totaux HT des factures impayées de l'année en cours / mois"
 
@@ -1116,20 +1132,20 @@ msgstr "Ajouter une information de paiement"
 msgid "N° %(account)s"
 msgstr "N° %(account)s"
 
-#: templates/billing/bricks/billing-payment-information.html:29
+#: templates/billing/bricks/billing-payment-information.html:28
 msgid "Selected account for this document"
 msgstr "Compte sélectionné pour ce document"
 
-#: templates/billing/bricks/billing-payment-information.html:31
+#: templates/billing/bricks/billing-payment-information.html:30
 msgid "Select this account"
 msgstr "Sélectionner ce compte"
 
-#: templates/billing/bricks/billing-payment-information.html:37
+#: templates/billing/bricks/billing-payment-information.html:35
 #: templates/billing/bricks/orga-payment-information.html:51
 msgid "RIB"
 msgstr "RIB"
 
-#: templates/billing/bricks/billing-payment-information.html:49
+#: templates/billing/bricks/billing-payment-information.html:47
 #: templates/billing/bricks/orga-payment-information.html:67
 msgid "No payment information for the moment"
 msgstr "Aucune information de paiement pour le moment"
@@ -1262,12 +1278,6 @@ msgstr "Totaux"
 msgid "Add"
 msgstr ""
 
-# Already in creme_core
-#: templates/billing/form/edit.html:4
-#, python-format
-msgid "Edit «%(object)s»"
-msgstr ""
-
 #: templates/billing/frags/button_convert2invoice.html:16
 #: templates/billing/frags/button_convert2order.html:16
 msgid "forbidden"
@@ -1310,7 +1320,7 @@ msgstr "Avoirs consommables par «{entity}»"
 msgid "Link the credit notes"
 msgstr "Lier les avoirs"
 
-#: views/export.py:107
+#: views/export.py:108
 msgid ""
 "The generation of the PDF file has failed ; please contact your "
 "administrator."
@@ -1343,12 +1353,12 @@ msgstr "Ajouter cette ligne à la volée à vôtre catalogue"
 msgid "Add to the catalog"
 msgstr "Ajouter au catalogue"
 
-#: views/payment_information.py:46
+#: views/payment_information.py:46 views/payment_information.py:60
 #, python-brace-format
 msgid "New payment information in the organisation «{entity}»"
 msgstr "Nouvelle information de paiement pour la société «{entity}»"
 
-#: views/payment_information.py:54
+#: views/payment_information.py:95
 #, python-brace-format
 msgid "Payment information for «{entity}»"
 msgstr "Information de paiement pour «{entity}»"
