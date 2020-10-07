@@ -53,16 +53,21 @@ class InvoiceTestCase(_BillingTestCase):
         return reverse('billing__generate_invoice_number', args=(invoice.id,))
 
     def test_createview01(self):
-        user = self.login()
+        "Source is not managed."
+        self.login()
 
-        self.assertGET200(reverse('billing__create_invoice'))
+        response = self.assertGET200(reverse('billing__create_invoice'))
 
+        with self.assertNoException():
+            number_f = response.context['form'].fields['number']
+
+        self.assertFalse(number_f.help_text)
+
+        # ---
         name = 'Invoice001'
         currency = Currency.objects.all()[0]
 
-        create_orga = partial(Organisation.objects.create, user=user)
-        source = create_orga(name='Source Orga')
-        target = create_orga(name='Target Orga')
+        source, target = self.create_orgas()
 
         self.assertFalse(target.billing_address)
         self.assertFalse(target.shipping_address)
@@ -99,8 +104,18 @@ class InvoiceTestCase(_BillingTestCase):
         self.create_invoice('Invoice002', source, target, currency)
         self.assertRelationCount(1, target, REL_SUB_CUSTOMER_SUPPLIER, source)
 
-    @skipIfCustomAddress
     def test_createview02(self):
+        "Source is managed => no number anyway."
+        self.login()
+
+        source, target = self.create_orgas()
+        self._set_managed(source)
+
+        invoice = self.create_invoice('Invoice001', source, target)
+        self.assertEqual('', invoice.number)
+
+    @skipIfCustomAddress
+    def test_createview_with_address(self):
         user = self.login()
 
         name = 'Invoice001'
@@ -120,10 +135,14 @@ class InvoiceTestCase(_BillingTestCase):
         )
         target.save()
 
-        self.assertEqual(source.id,
-                         self.client.get(reverse('billing__create_invoice'))
-                                    .context['form']['source'].field.initial
-                        )
+        self.assertEqual(
+            # source.id,
+            source,
+            self.client.get(reverse('billing__create_invoice'))
+                       .context['form']['source']
+                       .field
+                       .initial
+        )
 
         description = 'My fabulous invoice'
         b_order = '123abc'
@@ -143,7 +162,7 @@ class InvoiceTestCase(_BillingTestCase):
 
         self.assertGET200(invoice.get_absolute_url())
 
-    def test_createview03(self):
+    def test_createview_error(self):
         "Credentials errors with Organisation"
         user = self.login(is_superuser=False, creatable_models=[Invoice])
         create_sc = partial(SetCredentials.objects.create, role=self.role)

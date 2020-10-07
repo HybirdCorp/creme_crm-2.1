@@ -181,7 +181,7 @@ class _BillingTestCaseMixin:
 
         return invoice, source, target
 
-    def create_quote(self, name, source, target, currency=None, status=None):
+    def create_quote(self, name, source, target, currency=None, status=None, **kwargs):
         status = status or QuoteStatus.objects.all()[0]
         currency = currency or Currency.objects.all()[0]
         response = self.client.post(
@@ -199,6 +199,8 @@ class _BillingTestCaseMixin:
 
                 'source': source.id,
                 'target': self.formfield_value_generic_entity(target),
+
+                **kwargs
             },
         )
         self.assertNoFormError(response)
@@ -208,9 +210,9 @@ class _BillingTestCaseMixin:
 
         return quote
 
-    def create_quote_n_orgas(self, name, currency=None, status=None):
+    def create_quote_n_orgas(self, name, currency=None, status=None, **kwargs):
         source, target = self.create_orgas()
-        quote = self.create_quote(name, source, target, currency, status)
+        quote = self.create_quote(name, source, target, currency, status, **kwargs)
 
         return quote, source, target
 

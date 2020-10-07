@@ -1,3 +1,14 @@
+== Version 2.1.9 Work in progress (not released -- this is a draft) ==
+
+  User side :
+  -----------
+    # Apps:
+        * Billing :
+            - In Quote & Sales Order, the number management has been improved:
+                - the value given in the creation form is used if the source organisation is not managed by Creme (because it is generated if the source is managed).
+                - the help text in the creation form indicates this behaviour.
+
+
 == Version 2.1.8 ==
 
   User side :
