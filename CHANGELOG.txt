@@ -7,6 +7,8 @@
             - In Quote & Sales Order, the number management has been improved:
                 - the value given in the creation form is used if the source organisation is not managed by Creme (because it is generated if the source is managed).
                 - the help text in the creation form indicates this behaviour.
+        * Emails :
+            - These fields of 'EmailTemplate' cannot be inner-edited anymore: 'body', 'body_html'.
 
 
 == Version 2.1.8 ==
