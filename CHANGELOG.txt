@@ -9,6 +9,8 @@
                 - the help text in the creation form indicates this behaviour.
         * Emails :
             - These fields of 'EmailTemplate' cannot be inner-edited anymore: 'body', 'body_html'.
+        * SMS :
+            - The messaging lists are now excluded correctly from the edition form of 'SMSCampaigns'.
 
 
 == Version 2.1.8 ==
