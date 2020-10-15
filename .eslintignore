@@ -1,3 +1,4 @@
 **/js/jquery/*
+**/js/lib/editor/*
+**/js/tests/qunit/qunit-*.js
 **/creme_core/js/datejs/*
-

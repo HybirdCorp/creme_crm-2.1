@@ -22,6 +22,7 @@
     "CSSStyleDeclaration": true,
 
     "jQuery": true,
+    "tinymce": true,
 
     /* Django i18n */
     "gettext": true,
