@@ -3,10 +3,10 @@ Carnet du développeur de modules Creme
 ======================================
 
 :Author: Guillaume Englert
-:Version: 07-11-2019 pour la version 2.1 de Creme
+:Version: 10-11-2019 pour la version 2.1 de Creme
 :Copyright: Hybird
 :License: GNU FREE DOCUMENTATION LICENSE version 1.3
-:Errata: Hugo Smett
+:Errata: Hugo Smett, Patix
 
 .. contents:: Sommaire
 
@@ -183,7 +183,7 @@ un second fichier nommé ``__init__.py``, et qui contient : ::
 
     # -*- coding: utf-8 -*-
 
-    from beaver import Beaver
+    from .beaver import Beaver
 
 
 Ainsi, au démarrage de Creme, notre modèle sera importé automatiquement par Django, et
@@ -553,6 +553,8 @@ et nous créons tout d'abord une nouvelle entrée de niveau 2 dans l'entrée de 
         [...]
 
         def register_menu(self, creme_menu):
+            from .models import Beaver
+
             creme_menu.get('features', 'persons-directory') \
                       .add(creme_menu.URLItem.list_view('beavers-beavers', model=Beaver))
 
@@ -866,8 +868,8 @@ Modifiez *models/__init__.py* : ::
 
     # -*- coding: utf-8 -*-
 
-    from status import Status  # <-- NEW
-    from beaver import Beaver
+    from .status import Status  # <-- NEW
+    from .beaver import Beaver
 
 
 Nous allons générer une première migration qui généré la table correspondante : ::
@@ -938,7 +940,7 @@ Puis ajoutons un champ 'status' dans notre modèle ``Beaver`` : ::
 
     from creme.creme_core.models import CremeEntity, CREME_REPLACE
 
-    from status import Status  # <- NEW
+    from .status import Status  # <- NEW
 
 
     class Beaver(CremeEntity):
