@@ -1,3 +1,9 @@
+== Version 2.1.10 Work in progress (not released -- this is a draft) ==
+
+  UPGRADE NOTE :
+    - You should upgrade the minor version of Django 2.2 (2.2.17 or more) if you use Python 3.9
+
+
 == Version 2.1.9 ==
 
   User side :
