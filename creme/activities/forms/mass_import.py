@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2014-2019  Hybird
+#    Copyright (C) 2014-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -30,8 +30,8 @@ from django.forms.widgets import Select
 from django.utils.translation import gettext as _, gettext_lazy
 
 from creme.creme_core.auth.entity_credentials import EntityCredentials
+from creme.creme_core.forms import validators
 from creme.creme_core.forms.mass_import import ImportForm4CremeEntity, BaseExtractorWidget
-from creme.creme_core.forms.validators import validate_linkable_entities
 from creme.creme_core.models import Relation, RelationType
 from creme.creme_core.utils.dates import make_aware_dt
 
@@ -583,11 +583,21 @@ def get_massimport_form_builder(header_dict, choices):
 
             self.user_participants = []
 
+        # TODO: factorise with ActivityCreateForm
+        def clean_my_participation(self):
+            my_participation = self.cleaned_data['my_participation']
+
+            if my_participation[0]:
+                user = self.user
+                validators.validate_linkable_entity(user.linked_contact, user)
+
+            return my_participation
+
         def clean_participating_users(self):
             users = self.cleaned_data['participating_users']
-            self.user_participants.extend(
-                validate_linkable_entities(Contact.objects.filter(is_user__in=users), self.user)
-            )
+            self.user_participants.extend(validators.validate_linkable_entities(
+                Contact.objects.filter(is_user__in=users), self.user,
+            ))
             return users
 
         def _pre_instance_save(self, instance, line):
