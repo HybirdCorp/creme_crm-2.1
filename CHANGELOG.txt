@@ -7,7 +7,9 @@
   -----------
     # Apps:
         * Activities :
-            - Now the LINK credentials are checked for "My participation" in CSV import.
+            - In CSV import:
+                - The LINK credentials are checked for "My participation".
+                - Teams are correctly managed as participating users.
 
 
 == Version 2.1.9 ==
