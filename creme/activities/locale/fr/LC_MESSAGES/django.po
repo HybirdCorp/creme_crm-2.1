@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Activities 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-09 11:46+0100\n"
+"POT-Creation-Date: 2020-11-17 11:09+0100\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "Download in iCalendar format"
 msgstr "Télécharger au format iCalendar"
 
-#: apps.py:30 apps.py:124 apps.py:149 models/activity.py:130
+#: apps.py:30 apps.py:124 apps.py:149 models/activity.py:131
 msgid "Activities"
 msgstr "Activités"
 
@@ -43,7 +43,7 @@ msgstr "Appel téléphonique"
 msgid "Meeting"
 msgstr "Rendez-vous"
 
-#: apps.py:152 models/activity.py:129
+#: apps.py:152 models/activity.py:130
 msgid "Activity"
 msgstr "Activité"
 
@@ -55,7 +55,7 @@ msgstr "Tâche"
 msgid "Unavailability"
 msgstr "Indisponibilité"
 
-#: bricks.py:51 forms/activity.py:510 forms/bricks.py:55
+#: bricks.py:51 forms/activity.py:516 forms/bricks.py:55
 #: forms/mass_import.py:564 templates/activities/bricks/participants.html:7
 msgid "Participants"
 msgstr "Participants"
@@ -145,7 +145,7 @@ msgstr ""
 msgid "You can't set the end of your activity without setting its start"
 msgstr "Vous ne pouvez préciser la fin de l'activité sans préciser son début"
 
-#: forms/activity.py:70 forms/mass_import.py:609
+#: forms/activity.py:70 forms/mass_import.py:628
 msgid "End time is before start time"
 msgstr "L'heure de fin est avant le début"
 
@@ -157,7 +157,7 @@ msgstr "La durée par défaut du type sera utilisée si vous laissez vide."
 msgid "It is only informative and is not used to compute the end time."
 msgstr "Seulement informative et pas utilisée pour calculer l'heure de fin."
 
-#: forms/activity.py:199 forms/activity.py:277 forms/activity.py:509
+#: forms/activity.py:199 forms/activity.py:277 forms/activity.py:515
 msgid "When"
 msgstr "Quand"
 
@@ -253,7 +253,15 @@ msgstr "non renseigné"
 msgid "Unavailability type"
 msgstr "Type d'indisponibilité"
 
-#: forms/activity.py:525
+#: forms/activity.py:509
+msgid ""
+"An unavailability always busies its participants ; mark it as «all day» if "
+"you do not set the start/end times."
+msgstr ""
+"Une indisponibilité occupe toujours ses participants ; marquez la comme "
+"«toute la journée» si vous ne remplissez pas les heures de début/fin."
+
+#: forms/activity.py:531
 msgid "Unavailable users"
 msgstr "Utilisateurs non-disponibles"
 
@@ -368,65 +376,65 @@ msgstr "Le sujet «{}» est introuvable"
 msgid "Subjects (organisations only)"
 msgstr "Sujets (sociétés seulement)"
 
-#: models/activity.py:81
+#: models/activity.py:82
 msgid "Title"
 msgstr "Titre"
 
-#: models/activity.py:82
+#: models/activity.py:83
 msgid "Start"
 msgstr "Début"
 
-#: models/activity.py:83
+#: models/activity.py:84
 msgid "End"
 msgstr "Fin"
 
-#: models/activity.py:86 templates/activities/bricks/base/activities.html:87
+#: models/activity.py:87 templates/activities/bricks/base/activities.html:87
 msgid "Minutes"
 msgstr "Bilan"
 
-#: models/activity.py:87
+#: models/activity.py:88
 msgid "Activity place"
 msgstr "Lieu de l'activité"
 
-#: models/activity.py:89
+#: models/activity.py:90
 msgid "Duration (in hour)"
 msgstr "Durée (en heures)"
 
-#: models/activity.py:94
+#: models/activity.py:95
 msgid "Activity type"
 msgstr "Type d'activité"
 
-#: models/activity.py:98
+#: models/activity.py:99
 msgid "Activity sub-type"
 msgstr "Sous-type d'activité"
 
-#: models/activity.py:102
+#: models/activity.py:103
 msgid "Status"
 msgstr "Statut"
 
-#: models/activity.py:108 models/calendar.py:102
+#: models/activity.py:109 models/calendar.py:102
 #: templates/activities/bricks/user-calendars.html:7
 #: templates/activities/calendar.html:4
 msgid "Calendars"
 msgstr "Calendriers"
 
-#: models/activity.py:113
+#: models/activity.py:114
 msgid "All day?"
 msgstr "Toute la journée ?"
 
-#: models/activity.py:114
+#: models/activity.py:115
 msgid "Busy?"
 msgstr "Occupé ?"
 
-#: models/activity.py:116
+#: models/activity.py:117
 msgid "Floating type"
 msgstr "Type flottant"
 
-#: models/activity.py:122
+#: models/activity.py:123
 msgid "Create an activity"
 msgstr "Créer une activité"
 
-#: models/activity.py:123
+#: models/activity.py:124
 msgid "Save the activity"
 msgstr "Enregistrer l'activité"
 

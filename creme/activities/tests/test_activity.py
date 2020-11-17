@@ -170,9 +170,12 @@ class ActivityTestCase(_ActivitiesTestCase):
         self.assertEqual(lv_url,                  context.get('cancel_url'))
 
         with self.assertNoException():
-            my_part_f = context['form'].fields['my_participation']
+            fields = context['form'].fields
+            my_part_f = fields['my_participation']
+            allday_f = fields['is_all_day']
 
         self.assertEqual((True, my_calendar.id), my_part_f.initial)
+        self.assertFalse(allday_f.help_text)
 
         # POST ---
         title = 'My task'
@@ -1726,6 +1729,18 @@ class ActivityTestCase(_ActivitiesTestCase):
         self.assertTemplateUsed(response, 'activities/frags/indispo_form_content.html')
         self.assertEqual(_('Create an unavailability'), response.context.get('title'))
 
+        with self.assertNoException():
+            allday_f = response.context['form'].fields['is_all_day']
+
+        self.assertEqual(
+            _(
+                'An unavailability always busies its participants ; mark it as '
+                '«all day» if you do not set the start/end times.'
+            ),
+            allday_f.help_text,
+        )
+
+        # ---
         title = 'Away'
         response = self.client.post(url, follow=True,
                                     data={'user':               user.pk,

@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -504,6 +504,12 @@ class IndisponibilityCreateForm(_ActivityCreateForm):
             'place', 'description', 'minutes', 'busy', 'status',
             'duration',
         )  # TODO: test
+        help_texts = {
+            'is_all_day': _(
+                'An unavailability always busies its participants ; mark it as '
+                '«all day» if you do not set the start/end times.'
+            ),
+        }
 
     blocks = _ActivityCreateForm.blocks.new(
         ('datetime',     _('When'),         ['is_all_day', 'start', 'start_time', 'end', 'end_time']),
