@@ -7,6 +7,7 @@
   -----------
     # Apps:
         * Activities :
+            - An help text has been added to the field "Is all day ?" in Unavailability form.
             - In CSV import:
                 - The LINK credentials are checked for "My participation".
                 - Teams are correctly managed as participating users.
