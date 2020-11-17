@@ -20,7 +20,6 @@
 
 import copy
 from functools import partial
-from json import dumps as json_dump
 import logging
 from types import GeneratorType
 
@@ -889,6 +888,7 @@ class TinyMCEEditor(widgets.Textarea):
                     'ui-creme-input ui-creme-widget '
         final_attrs['class'] = css_class + widget_type
         final_attrs['widget'] = widget_type
+        final_attrs['basepath'] = '{}tiny_mce/'.format(settings.MEDIA_URL)
 
         return context
 
