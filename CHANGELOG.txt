@@ -5,6 +5,8 @@
 
   User side :
   -----------
+    # The "similarity" password validator is now working correctly.
+      (ie: 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator')
     # Apps:
         * Activities :
             - An help text has been added to the field "Is all day ?" in Unavailability form.
