@@ -12,6 +12,12 @@
                 - The LINK credentials are checked for "My participation".
                 - Teams are correctly managed as participating users.
 
+  Developers side :
+  -----------------
+    Non breaking changes :
+    ----------------------
+        # The class 'creme_core.forms.base.CremeEntityForm' now checks 'LINK' credentials for the subject on "forced_relations".
+
 
 == Version 2.1.9 ==
 
