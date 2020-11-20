@@ -836,6 +836,57 @@ class CremeEntityFormTestCase(CremeTestCase):
         )
         self.assertFalse(form.errors)
 
+    def test_relations_credentials06(self):
+        "Link credentials on the created entity + forced relationships."
+        user = self.login(is_superuser=False, creatable_models=[FakeContact])
+
+        create_creds = partial(SetCredentials.objects.create, role=self.role)
+        create_creds(
+            value=EntityCredentials.VIEW | EntityCredentials.LINK,
+            set_type=SetCredentials.ESET_OWN,
+        )
+        create_creds(value=EntityCredentials.VIEW, set_type=SetCredentials.ESET_ALL)
+
+        orga = FakeOrganisation.objects.create(user=user, name='Oshino corp.')
+
+        rtype = RelationType.create(
+            ('test-subject_heals', 'heals'),
+            ('test-object_heals',  'is healed by'),
+        )[1]
+
+        data = {
+            'first_name': 'Kanbaru',
+            'last_name': 'Suruga',
+        }
+        forced_relations = [Relation(type=rtype, object_entity=orga)]
+
+        # KO ---
+        form1 = FakeContactForm(
+            user=user,
+            data={**data, 'user': self.other_user.id},
+            forced_relations=forced_relations,
+        )
+        self.assertFormInstanceErrors(
+            form1,
+            (
+                'user',
+                _('You are not allowed to link with the «{models}» of this user.').format(
+                    models='Test Contacts',
+                ),
+            ),
+        )
+
+        # OK ---
+        form2 = FakeContactForm(
+            user=user,
+            data={**data, 'user': user.id},
+            forced_relations=forced_relations,
+        )
+        self.assertFalse(form2.errors)
+
+        subject = form2.save()
+        self.assertRelationCount(1, subject, rtype, orga)
+
     def test_relations_error01(self):
         "ContentType constraint error."
         user = self.login()

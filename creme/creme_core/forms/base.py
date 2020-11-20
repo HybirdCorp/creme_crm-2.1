@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2020  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -39,6 +39,7 @@ from ..models import (
 from ..utils.collections import FluentList
 
 from . import fields, widgets
+from .validators import validate_linkable_model
 
 __all__ = (
     'FieldBlockManager', 'CremeForm', 'CremeModelForm',
@@ -547,6 +548,14 @@ class CremeEntityForm(CremeModelForm):
         self._check_subject_linkable(rtypes)
 
         return sf_rtypes
+
+    def clean_user(self):
+        owner = self.cleaned_data['user']
+
+        if self.forced_relations_info:
+            validate_linkable_model(self._meta.model, self.user, owner=owner)
+
+        return owner
 
     def _get_relations_to_create(self):
         cdata = self.cleaned_data
