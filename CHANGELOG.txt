@@ -5,6 +5,8 @@
     # The command "creme_uninstall" was broken.
     # Some typo in french translations were fixed.
     # Apps:
+        * Activities:
+            - Fix an issue with allDay value when resizing a event in the calendar
         * Geolocation :
             - Fix local path issue with CSVPopulator on windows systems
 

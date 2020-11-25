@@ -183,7 +183,7 @@ creme.activities.calendar.updater = function(update_url, event, dayDelta, minute
                      {id: event.id,
                       start: event.start.getTime(),
                       end: event.end.getTime(),
-                      allDay: allDay
+                      allDay: allDay || false
                      })
               .onFail(function(event, data, error) {
                   if (error.status === 403) {
