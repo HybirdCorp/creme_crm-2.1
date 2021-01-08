@@ -1,5 +1,11 @@
 -== Version 2.1.11 Work in progress (not released -- this is a draft) ==
 
+  Developers side :
+  -----------------
+    Non breaking changes :
+    ----------------------
+        # The command "entity_factory" was broken with newer versions of Django & Faker.
+
 
 == Version 2.1.10 ==
 
