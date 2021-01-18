@@ -132,7 +132,7 @@ msgstr "Comptage de fiche"
 
 #: forms/act.py:44 forms/act.py:123
 msgid "Do not count entity"
-msgstr "Ne pas compter de resource"
+msgstr "Ne pas compter de ressource"
 
 #: forms/act.py:51
 msgid "Integer value the counter has to reach"

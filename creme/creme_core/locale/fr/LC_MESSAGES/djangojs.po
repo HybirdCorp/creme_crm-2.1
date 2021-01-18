@@ -1,5 +1,5 @@
 # FR LOCALISATION OF 'CREME_CORE' APP (JavaScript only)
-# Copyright (C) 2019 Hybird
+# Copyright (C) 2021 Hybird
 # This file is distributed under the same license as the Creme package.
 #
 # > django-admin.py makemessages -d djangojs -l fr -i "static/creme_core/js/tests/*"
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Creme-Core 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 14:28+0100\n"
+"POT-Creation-Date: 2021-01-18 18:03+0100\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -178,11 +178,11 @@ msgstr "Fermer"
 
 #: static/creme_core/js/lv_widget.js:254
 msgid "Please select 2 entities."
-msgstr "Veuillez sélectioner 2 fiches."
+msgstr "Veuillez sélectionner 2 fiches."
 
 #: static/creme_core/js/lv_widget.js:409
 msgid "Please select only one entity."
-msgstr "Veuillez sélectioner une seule fiche."
+msgstr "Veuillez sélectionner une seule fiche."
 
 #: static/creme_core/js/lv_widget.js:444
 msgid "Validate the selection"

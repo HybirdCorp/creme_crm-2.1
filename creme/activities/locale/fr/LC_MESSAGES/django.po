@@ -1,5 +1,5 @@
 # FR LOCALISATION OF 'ACTIVITIES' APP
-# Copyright (C) 2020 Hybird
+# Copyright (C) 2021 Hybird
 # This file is distributed under the same license as the Creme package.
 #
 # > django-admin.py makemessages -l fr -i "tests/*"
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Activities 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-17 11:09+0100\n"
+"POT-Creation-Date: 2021-01-18 17:53+0100\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -366,7 +366,7 @@ msgstr "Plusieurs «{models}» ont été trouvés pour la recherche «{search}»
 
 #: forms/mass_import.py:451
 msgid "No linkable entity found for the search «{}»"
-msgstr "Aucune fiche reliable touvée pour la recherche «{}»"
+msgstr "Aucune fiche reliable trouvée pour la recherche «{}»"
 
 #: forms/mass_import.py:453
 msgid "The subject «{}» is unfoundable"
@@ -1161,7 +1161,7 @@ msgstr "Changer le calendrier de «{object}»"
 #~ msgstr "Ajouter à un calendrier"
 
 #~ msgid "Please select at least a line in order to export."
-#~ msgstr "Veuillez sélectioner au moins une ligne pour pouvoir exporter."
+#~ msgstr "Veuillez sélectionner au moins une ligne pour pouvoir exporter."
 
 #~ msgid "Do I participate to this meeting?"
 #~ msgstr "Est-ce que je participe à ce rendez-vous ?"

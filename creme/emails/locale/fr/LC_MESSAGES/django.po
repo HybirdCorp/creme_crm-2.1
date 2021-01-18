@@ -1,5 +1,5 @@
 # FR LOCALISATION OF 'EMAILS' APP
-# Copyright (C) 2020 Hybird
+# Copyright (C) 2021 Hybird
 # This file is distributed under the same license as the Creme package.
 #
 # > django-admin.py makemessages -l fr -i "tests/*"
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Emails 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-01 17:02+0200\n"
+"POT-Creation-Date: 2021-01-18 17:55+0100\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -386,7 +386,7 @@ msgstr "Créer un e-mail"
 
 #: models/mail.py:97
 msgid "Save the email"
-msgstr "Enregister l'e-mail"
+msgstr "Enregistrer l'e-mail"
 
 #: models/mail.py:98 views/mail.py:239
 msgid "Send the email"
