@@ -22,7 +22,7 @@ import csv
 from functools import partial
 import io
 import logging
-from urllib.parse import urlparse
+
 from urllib.request import urlopen
 from zipfile import ZipFile
 
@@ -33,6 +33,7 @@ from django.template.defaultfilters import slugify
 
 from creme.creme_core.utils.chunktools import iter_as_chunk
 from creme.creme_core.utils.collections import OrderedSet
+from creme.creme_core.utils.url import parse_path
 
 from creme.persons import get_address_model
 
@@ -75,9 +76,10 @@ class CSVPopulator:
 
     def _get_source_file(self, url_info):
         if url_info.scheme in {'file', ''}:
+            self.info('Reading database {}...'.format(url_info.path))
             return open(url_info.path, 'rb')
         elif url_info.scheme in {'http', 'https'}:
-            self.info('Downloading database...')
+            self.info('Downloading database {}...'.format(url_info.geturl()))
             return urlopen(url_info.geturl())
         else:
             raise self.ProtocolError('Unable to open CSV data from {} : '
@@ -136,7 +138,7 @@ class CSVPopulator:
     def populate(self, source):
         if isinstance(source, str):
             try:
-                url_info = urlparse(source)
+                url_info = parse_path(source)
 
                 with self._get_source_file(url_info) as bytes_input:
                     if url_info.path.endswith('.zip'):

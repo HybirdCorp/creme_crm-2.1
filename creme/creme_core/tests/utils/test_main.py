@@ -12,6 +12,7 @@ try:
 
     from django.conf import settings
     from django.http import Http404
+    from django.test import TestCase
     from django.urls import reverse
     from django.utils.timezone import is_naive, is_aware, override as override_tz, make_aware
     from django.utils.translation import gettext_lazy
@@ -30,7 +31,7 @@ try:
     from creme.creme_core.utils.html import escapejson
     from creme.creme_core.utils.log import log_exceptions
     from creme.creme_core.utils.secure_filename import secure_filename
-    from creme.creme_core.utils.url import TemplateURLBuilder
+    from creme.creme_core.utils.url import TemplateURLBuilder, parse_path
 except Exception as e:
     print('Error in <{}>: {}'.format(__name__, e))
 
@@ -260,10 +261,11 @@ class MiscTestCase(CremeTestCase):
                         )
 
         with self.assertNoException():
-            size = open_img(join(settings.CREME_ROOT, 'static', 'common', 'images',
-                                 secure_filename('500_200.png')
-                                )
-                           ).size
+            with open_img(join(settings.CREME_ROOT, 'static', 'common', 'images',
+                               secure_filename('500_200.png')
+                          )) as img_fd:
+                size = img_fd.size
+
         self.assertEqual((200, 200), size)
 
     def test_escapejson(self):
@@ -666,3 +668,19 @@ class TemplateURLBuilderTestCase(CremeTestCase):
                                 .replace(placeholder3, final_value3),
                          tub.resolve(vname)
                         )
+
+
+class TestPath(TestCase):
+    def test_empty(self):
+        self.assertEqual('', parse_path('').geturl())
+        self.assertEqual('/', parse_path('/').geturl())
+        self.assertEqual('file://', parse_path('file://').geturl())
+
+    def test_file(self):
+        self.assertEqual('file://C/test', parse_path(r'C:\test').geturl())
+        self.assertEqual('file://C/test', parse_path(r'file://C:/test').geturl())
+        self.assertEqual('test', parse_path(r'test').geturl())
+
+    def test_protocol(self):
+        self.assertEqual('https://test', parse_path(r'https://test').geturl())
+        self.assertEqual('https://C:/test', parse_path(r'https://C:/test').geturl())
