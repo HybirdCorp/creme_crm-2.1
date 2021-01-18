@@ -24,6 +24,9 @@
 #
 ################################################################################
 
+import re
+
+from urllib.parse import urlparse
 from django.urls import reverse
 
 
@@ -129,3 +132,9 @@ class TemplateURLBuilder:
         raise TemplateURLBuilderError('Cannot generate a URL because of a collision '
                                       '(we tried these URLs -- with place holders --: {})'.format(' '.join(tried_urls))
                                      )
+
+
+def parse_path(path):
+    # handles C:/ usecase for windows
+    path = re.sub(r'^(?:file://)?[/]*([A-Za-z]):[\\/]', r'file://\1/', path)
+    return urlparse(path)
