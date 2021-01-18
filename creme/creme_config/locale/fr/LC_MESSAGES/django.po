@@ -188,7 +188,7 @@ msgstr "S'applique aux types de fiches"
 
 #: forms/creme_property_type.py:34
 msgid "No selected type means that all types are accepted"
-msgstr "Aucun type séléctionné signifiera que tous les types sont acceptés"
+msgstr "Aucun type sélectionné signifiera que tous les types sont acceptés"
 
 #: forms/creme_property_type.py:45
 msgid "A property type with this name already exists."

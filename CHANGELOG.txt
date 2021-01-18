@@ -1,5 +1,9 @@
 -== Version 2.1.11 Work in progress (not released -- this is a draft) ==
 
+  User side :
+  -----------
+    # Some typo in french translations were fixed.
+
   Developers side :
   -----------------
     Non breaking changes :

@@ -1,5 +1,5 @@
 # FR LOCALISATION OF 'CREME_CORE' APP
-# Copyright (C) 2020 Hybird
+# Copyright (C) 2021 Hybird
 # This file is distributed under the same license as the Creme package.
 #
 # > django-admin.py makemessages -l fr -i "tests/*" -i "templates/creme_core/tests/*"
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Creme-Core 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-10 21:17+0100\n"
+"POT-Creation-Date: 2021-01-18 17:58+0100\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -1003,7 +1003,7 @@ msgstr "Ce champ date n'existe pas dans ce type de fiche."
 
 #: forms/entity_filter/fields.py:299
 msgid "This date range is invalid."
-msgstr "Cet interval de date n'est pas valide."
+msgstr "Cet intervalle de date n'est pas valide."
 
 #: forms/entity_filter/fields.py:300
 msgid "Please enter a start date and/or a end date."
@@ -1116,11 +1116,11 @@ msgstr "La fiche est obligatoire."
 
 #: forms/fields.py:143
 msgid "The content type is required."
-msgstr "Le type de resource est obligatoire."
+msgstr "Le type de ressource est obligatoire."
 
 #: forms/fields.py:144
 msgid "This content type is not allowed."
-msgstr "Ce type de resource n'est pas autorisé'."
+msgstr "Ce type de ressource n'est pas autorisé'."
 
 #: forms/fields.py:591
 msgid "This type of relationship does not exist."
@@ -1133,7 +1133,7 @@ msgstr "Ce type de relation provoque une erreur de contrainte."
 #: forms/fields.py:593
 msgid "This content type cause constraint error with the type of relationship."
 msgstr ""
-"Ce type de resource provoque une erreur de contrainte avec le type de "
+"Ce type de ressource provoque une erreur de contrainte avec le type de "
 "relation"
 
 #: forms/fields.py:594
@@ -1933,7 +1933,7 @@ msgstr "App invalide \"{}\""
 
 #: models/auth.py:922
 msgid "You are not allowed to access to the app: {}"
-msgstr "Vous n'avez pas accés à cette application: {}"
+msgstr "Vous n'avez pas accès à cette application: {}"
 
 #: models/auth.py:933
 msgid "You are not allowed to configure this app: {}"
@@ -2078,7 +2078,7 @@ msgstr "Symbole local"
 
 #: models/currency.py:31
 msgid "International symbol"
-msgstr "Symbol international"
+msgstr "Symbole international"
 
 #: models/currency.py:34
 msgid "Create a currency"
@@ -2701,7 +2701,7 @@ msgstr "Réservé aux super-utilisateurs"
 
 #: setting_keys.py:11
 msgid "By default, are blocks open ?"
-msgstr "Par défaut, est-ce que les blocs apparaîssent ouverts ?"
+msgstr "Par défaut, est-ce que les blocs apparaissent ouverts ?"
 
 #: setting_keys.py:16
 msgid "By default, are empty fields displayed ?"
@@ -3342,7 +3342,7 @@ msgstr "Tout sélectionner"
 
 #: templates/creme_core/forms/widgets/unordered-multiple.html:13
 msgid "Check none"
-msgstr "Tout déselectionner"
+msgstr "Tout dé-sélectionner"
 
 #: templates/creme_core/forms/widgets/unordered-multiple.html:23
 #: templates/creme_core/search_results.html:47
@@ -3941,7 +3941,7 @@ msgstr "«{entity}» ne peut être supprimé."
 
 #: views/entity.py:959
 msgid "No selected entities"
-msgstr "Aucune fiche séléctionnée"
+msgstr "Aucune fiche sélectionnée"
 
 #: views/entity.py:969 views/relation.py:571
 #, python-brace-format
@@ -4278,7 +4278,7 @@ msgstr "Recherche vide…"
 #~ msgstr "Etat de bloc"
 
 #~ msgid "Content type is not registered in config"
-#~ msgstr "Le type de resource n'est enregsitrée dans la configuration"
+#~ msgstr "Le type de ressource n'est enregistrée dans la configuration"
 
 #~ msgid "Drag and drop the columns to order them."
 #~ msgstr "Glissez-déposez les colonnes pour les ordonner."
