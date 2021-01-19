@@ -13,6 +13,8 @@
     Non breaking changes :
     ----------------------
         # The command "entity_factory" was broken with newer versions of Django & Faker.
+        # In JavaScript :
+            - Fix class inheritance issue when _init_ raises exceptions.
 
 
 == Version 2.1.10 ==
