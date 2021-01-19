@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2014-2019  Hybird
+#    Copyright (C) 2014-2021  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -414,25 +414,27 @@ class Command(AppCommand):
             if verbosity:
                 self.stdout.write('Trying to delete tables...')
 
-            schema_editor = connection.schema_editor()
+            # schema_editor = connection.schema_editor()
 
             try:
-                while models:
-                    model = models.pop(0)
+                with connection.schema_editor() as schema_editor:
+                    while models:
+                        model = models.pop(0)
 
-                    if verbosity:
-                        meta = model._meta
-                        self.stdout.write(' Drop the model "{app}.{model}" (table: "{table}").'.format(
-                                                app=meta.app_label,
-                                                model=model.__name__,
-                                                table=meta.db_table,
-                                            )
-                                         )
+                        if verbosity:
+                            meta = model._meta
+                            self.stdout.write(
+                                ' Drop the model "{app}.{model}" (table: "{table}").'.format(
+                                    app=meta.app_label,
+                                    model=model.__name__,
+                                    table=meta.db_table,
+                                )
+                            )
 
-                    schema_editor.delete_model(model)
+                        schema_editor.delete_model(model)
 
-                    if verbosity:
-                        self.stdout.write(' [OK]', self.style.SUCCESS)
+                        if verbosity:
+                            self.stdout.write(' [OK]', self.style.SUCCESS)
             except Exception as e:
                 self.stderr.write(' [KO] Original error: {error}.\n'
                                   'Remaining tables:\n'
@@ -559,7 +561,8 @@ def ordered_models_to_delete(app_config, connection):
         for model in app_models:
             meta = model._meta
 
-            if connection.introspection.table_name_converter(meta.db_table) in table_names:
+            # if connection.introspection.table_name_converter(meta.db_table) in table_names:
+            if meta.db_table in table_names:
                 dependencies = set()  # We use a set to avoid duplicates
 
                 for f in meta.local_fields:
