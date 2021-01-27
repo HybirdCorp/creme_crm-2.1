@@ -1,5 +1,5 @@
 # FR LOCALISATION OF 'COMMERCIAL' APP
-# Copyright (C) 2019 Hybird
+# Copyright (C) 2021 Hybird
 # This file is distributed under the same license as the Creme package.
 #
 # > django-admin.py makemessages -l fr -i "tests/*"
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Creme-Core 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 14:24+0100\n"
+"POT-Creation-Date: 2021-01-27 19:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
@@ -121,8 +121,8 @@ msgid ""
 "organisation, one of its managers/employees, or an Opportunity which targets "
 "this organisation."
 msgstr ""
-"Pour chaque société cliente, un e-mail est envoyé à son propriété (c-a-d un "
-"utilisateur Creme), si il n'y a aucune approche commercial depuis {} jour "
+"Pour chaque société cliente, un e-mail est envoyé à son propriétaire (c-a-d un "
+"utilisateur Creme), si il n'y a aucune approche commerciale depuis {} jours "
 "liée à : la société, un de ses salariés/responsables, ou une Opportunité qui "
 "cible cette société."
 
