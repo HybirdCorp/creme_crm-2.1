@@ -4,6 +4,7 @@
   -----------
     # The command "creme_uninstall" was broken.
     # Some typo in french translations were fixed.
+    # Fix rich text editor used in mail templates.
     # Apps:
         * Activities:
             - Fix an issue with allDay value when resizing a event in the calendar
@@ -17,6 +18,7 @@
         # The command "entity_factory" was broken with newer versions of Django & Faker.
         # In JavaScript :
             - Fix class inheritance issue when _init_ raises exceptions.
+            - Upgrade to tinymce 3.4.9 without jquery adapter. Create the widget 'creme.widget.Editor' as remplacement.
 
 
 == Version 2.1.10 ==
