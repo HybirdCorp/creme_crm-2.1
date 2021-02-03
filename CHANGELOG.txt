@@ -10,6 +10,8 @@
             - Fix an issue with allDay value when resizing a event in the calendar
         * Geolocation :
             - Fix local path issue with CSVPopulator on windows systems
+        * Commercial :
+            - A column "Created on" has been added in the brick for 'CommercialApproaches'.
 
   Developers side :
   -----------------

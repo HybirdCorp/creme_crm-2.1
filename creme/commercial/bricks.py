@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2021  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -50,10 +50,11 @@ Strategy = commercial.get_strategy_model()
 
 
 class ApproachesBrick(QuerysetBrick):
-    id_           = QuerysetBrick.generate_id('commercial', 'approaches')
-    dependencies  = (CommercialApproach,)
-    order_by      = 'title'
-    verbose_name  = _('Commercial approaches')
+    id_ = QuerysetBrick.generate_id('commercial', 'approaches')
+    dependencies = (CommercialApproach,)
+    # order_by = 'title'
+    order_by = '-creation_date'
+    verbose_name = _('Commercial approaches')
     template_name = 'commercial/bricks/approaches.html'
 
     # TODO: factorise with assistants blocks (CremeEntity method ??)
@@ -93,9 +94,7 @@ class ApproachesBrick(QuerysetBrick):
         else:
             approaches = CommercialApproach.get_approaches(pk)
 
-        return self._render(self.get_template_context(
-                    context, approaches,
-        ))
+        return self._render(self.get_template_context(context, approaches))
 
     def home_display(self, context):
         btc = self.get_template_context(
