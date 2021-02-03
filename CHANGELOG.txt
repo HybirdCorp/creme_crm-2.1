@@ -5,6 +5,7 @@
     # The command "creme_uninstall" was broken.
     # Some typo in french translations were fixed.
     # Fix rich text editor used in mail templates.
+    # The ContentTypes in (Multi)GenericEntityField are now sorted by verbose name.
     # Apps:
         * Activities:
             - Fix an issue with allDay value when resizing a event in the calendar
