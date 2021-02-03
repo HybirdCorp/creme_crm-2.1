@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2021  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -475,13 +475,22 @@ class GenericEntityField(EntityCredsJSONField):
 
     def _get_ctypes_options(self):
         create_url = partial(self._create_url, self._user)
-        # return ((json_dump({'id': ctype.pk,
-        return ((json_encode({'id': ctype.pk,
-                              'create': create_url(ctype),
-                              'create_label': str(ctype.model_class().creation_label),
-                             }),
-                 str(ctype)
-                ) for ctype in self.get_ctypes())
+        choices = [
+            (
+                # json_dump({
+                json_encode({
+                    'id': ctype.pk,
+                    'create': create_url(ctype),
+                    'create_label': str(ctype.model_class().creation_label),
+                }),
+                str(ctype)
+            ) for ctype in self.get_ctypes()
+        ]
+
+        sort_key = collator.sort_key
+        choices.sort(key=lambda k: sort_key(k[1]))
+
+        return choices
 
     def get_ctypes(self):
         models = self._allowed_models
