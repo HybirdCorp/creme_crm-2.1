@@ -1,16 +1,20 @@
--== Version 2.1.11 Work in progress (not released -- this is a draft) ==
+== Version 2.1.11 ==
+
+  UPGRADE NOTE :
+    - You must re-generate the media files (python manage.py generatemedia).
 
   User side :
   -----------
     # The command "creme_uninstall" was broken.
     # Some typo in french translations were fixed.
-    # Fix rich text editor used in mail templates.
     # The ContentTypes in (Multi)GenericEntityField are now sorted by verbose name.
     # Apps:
         * Activities:
-            - Fix an issue with allDay value when resizing a event in the calendar
+            - An issue with allDay value when resizing a event in the calendar has been fixed.
+        * Emails :
+            # The Rich Text Editor used for Templates has been fixed.
         * Geolocation :
-            - Fix local path issue with CSVPopulator on windows systems
+            - There was an issue with local paths for CSVPopulator on Windows systems.
         * Commercial :
             - A column "Created on" has been added in the brick for 'CommercialApproaches'.
 
@@ -20,8 +24,9 @@
     ----------------------
         # The command "entity_factory" was broken with newer versions of Django & Faker.
         # In JavaScript :
-            - Fix class inheritance issue when _init_ raises exceptions.
-            - Upgrade to tinymce 3.4.9 without jquery adapter. Create the widget 'creme.widget.Editor' as remplacement.
+            - A issue with class inheritance (when '_init_' raises an exception) has been fixed.
+            - TinyMCE has been upgraded to version 3.4.9, without jQuery adapter.
+              A new widget 'creme.widget.Editor' has been created as replacement.
 
 
 == Version 2.1.10 ==
