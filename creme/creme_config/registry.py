@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2021  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -97,10 +97,13 @@ class _ModelConfigCreator(_ModelConfigAction):
         if self.enable_func(user=user):
             url_name = self.url_name
 
-            return reverse('creme_config__create_instance',
-                           args=(self._model._meta.app_label, self._model_name),
-                          ) if url_name is None else \
-                   reverse(url_name)
+            return reverse(
+                'creme_config__create_instance',
+                args=(
+                    self._model._meta.app_label,
+                    self._model_name,
+                ),
+            ) if url_name is None else reverse(url_name)
 
 
 class _ModelConfigEditor(_ModelConfigAction):
@@ -114,13 +117,21 @@ class _ModelConfigEditor(_ModelConfigAction):
         if self.enable_func(instance=instance, user=user):
             url_name = self.url_name
 
-            return reverse('creme_config__edit_instance',
-                           args=(self._model._meta.app_label,
-                                 self.model_name,
-                                 instance.id,
-                                ),
-                          ) if url_name is None else \
-                   reverse(url_name, args=(instance.id,))
+            return reverse(
+                'creme_config__edit_instance',
+                args=(
+                    self._model._meta.app_label,
+                    self.model_name,
+                    # 'pk' instead of 'id' because a model could have a different primary key
+                    #  (like GeoAddress)
+                    # instance.id,
+                    instance.pk,
+                ),
+            ) if url_name is None else reverse(
+                url_name,
+                # args=(instance.id,),
+                args=(instance.pk,),
+            )
 
 
 # TODO: factorise with _ModelConfigEditor
@@ -140,13 +151,19 @@ class _ModelConfigDeletor(_ModelConfigAction):
         if self.enable_func(instance=instance, user=user):
             url_name = self.url_name
 
-            return reverse('creme_config__delete_instance',
-                           args=(self._model._meta.app_label,
-                                 self.model_name,
-                                 instance.id,
-                                ),
-                          ) if url_name is None else \
-                   reverse(url_name, args=(instance.id,))
+            return reverse(
+                'creme_config__delete_instance',
+                args=(
+                    self._model._meta.app_label,
+                    self.model_name,
+                    # instance.id,
+                    instance.pk,
+                ),
+            ) if url_name is None else reverse(
+                url_name,
+                # args=(instance.id,),
+                args=(instance.pk,),
+            )
 
 
 # class ModelConfig:
