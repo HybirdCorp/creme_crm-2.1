@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2021  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -439,8 +439,8 @@ class BrickHomeLocationsBrick(_ConfigAdminBrick):
 
         paginator = btc['page'].paginator
         btc['show_add_button'] = (
-            (UserRole.objects.count() > paginator.count) and
-            superuser_count
+            (UserRole.objects.count() > paginator.count)
+            or (superuser_count == 0)
         )
 
         # NB: the UserRole queryset count does not use the default & superuser configuration
