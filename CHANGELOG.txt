@@ -1,4 +1,8 @@
-== Version 2.1.12 Work in progress (not released -- this is a draft) ==
+== Version 2.1.12 ==
+
+  UPGRADE NOTE :
+    - You should update your virtual environment to fix some security issues (pip install -U -r creme/requirements.txt)
+      Notice that last versions of Pillow need Python 3.6+ ; so consider to upgrade if are you still using Python 3.5.
 
   Users side :
   ------------
