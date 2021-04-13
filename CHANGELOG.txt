@@ -3,6 +3,12 @@
   UPGRADE NOTE :
     - You should upgrade the minor version of Django 2.2 (2.2.20 or more).
 
+  Users side :
+  ------------
+    # Apps :
+        * Polls :
+            - A crash when adding a section to a PollForm has been fixed (#175)
+
 
 == Version 2.1.12 ==
 

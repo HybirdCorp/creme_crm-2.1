@@ -103,6 +103,12 @@ class BrickTestCaseMixin:
 
         return value_node
 
+    def get_brick_title(self, brick_node):
+        span_node = brick_node.find('.//span[@class="brick-title"]')
+        self.assertIsNotNone(span_node)
+
+        return span_node.text.strip()
+
     def get_brick_header_buttons(self, brick_node):
         buttons_node = brick_node.find('.//div[@class="brick-header-buttons"]')
         self.assertIsNotNone(buttons_node)

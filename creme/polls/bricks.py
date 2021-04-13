@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2012-2019  Hybird
+#    Copyright (C) 2012-2021  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -56,11 +56,23 @@ class PollFormLinesBrick(Brick):
             else:
                 question_count += 1
 
-        question_label = lambda: ngettext('{count} Question', '{count} Questions', question_count).format(count=question_count)
-        section_label  = lambda: ngettext('{count} Section', '{count} Sections', section_count).format(section_count)
+        question_label = lambda: ngettext(
+            '{count} Question',
+            '{count} Questions',
+            question_count
+        ).format(count=question_count)
+        section_label  = lambda: ngettext(
+            '{count} Section',
+            '{count} Sections',
+            section_count
+        ).format(count=section_count)
 
         if section_count and question_count:
-            return gettext('{questions} and {sections}').format(questions=question_label(), sections=section_label())
+            # TODO: unit test
+            return gettext('{questions} and {sections}').format(
+                questions=question_label(),
+                sections=section_label(),
+            )
         elif section_count:
             return section_label()
         elif question_count:
