@@ -8,6 +8,7 @@
     # Apps :
         * Polls :
             - A crash when adding a section to a PollForm has been fixed (#175)
+            - The deleted replies are now ignored in bricks (#177).
 
 
 == Version 2.1.12 ==

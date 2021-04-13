@@ -87,10 +87,10 @@ class PollFormLinesBrick(Brick):
         PollFormLine.populate_conditions([node for node in nodes if not node.is_section])
 
         return self._render(self.get_template_context(
-                    context,
-                    nodes=nodes,
-                    title=self._build_title(nodes),
-                    style=NodeStyle(),
+            context,
+            nodes=nodes,
+            title=self._build_title(nodes),
+            style=NodeStyle(),
         ))
 
 
@@ -108,9 +108,9 @@ class PollReplyLinesBrick(Brick):
         nodes.set_conditions_flags()
 
         return self._render(self.get_template_context(
-                    context,
-                    nodes=nodes,
-                    style=NodeStyle(),
+            context,
+            nodes=nodes,
+            style=NodeStyle(),
         ))
 
 
@@ -126,10 +126,10 @@ class PollRepliesBrick(QuerysetBrick):
         pform = context['object']
 
         return self._render(self.get_template_context(
-                    context,
-                    PollReply.objects.filter(pform=pform),
-                    # TODO: reuse nodes (PollFormLinesBlock) to avoid a query
-                    propose_creation=pform.lines.exists(),
+            context,
+            PollReply.objects.filter(pform=pform, is_deleted=False),
+            # TODO: reuse nodes (PollFormLinesBlock) to avoid a query
+            propose_creation=pform.lines.exists(),
         ))
 
 
@@ -144,9 +144,9 @@ class _RelatedRepliesBrick(QuerysetBrick):
         pk = context['object'].id
 
         return self._render(self.get_template_context(
-                    context,
-                    self._get_replies(pk),
-                    propose_creation=True,
+            context,
+            self._get_replies(pk).filter(is_deleted=False),
+            propose_creation=True,
         ))
 
 
