@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Creme-Core 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-18 17:58+0100\n"
+"POT-Creation-Date: 2021-05-40 17:58+0200\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -154,7 +154,7 @@ msgid ""
 msgstr ""
 "Un fichier CSV contient les valeurs des champs d'une fiche sur chaque ligne, "
 "séparées par des virgules ou des points-virgules et chacune pouvant être "
-"entourée par des guillemets \" (pour protégér une valeur contenant une "
+"entourée par des guillemets \" (pour protéger une valeur contenant une "
 "virgule par exemple)."
 
 #: backends/xls_export.py:38 backends/xls_import.py:30
@@ -1023,7 +1023,7 @@ msgstr "Cette relation est invalide avec ce type de fiche."
 
 #: forms/entity_filter/fields.py:687
 msgid "This content type is invalid."
-msgstr "Ce type de resource n'est pas autorisé."
+msgstr "Ce type de ressource n'est pas autorisé."
 
 #: forms/entity_filter/fields.py:688
 msgid "This entity is invalid."
@@ -1764,7 +1764,7 @@ msgid ""
 "values of fields or relationships for example."
 msgstr ""
 "Le choix «Fiches filtrées» permet de configurer des droits basés sur la "
-"valeurde champs ou bien les relations par exemple."
+"valeur de champs ou bien les relations par exemple."
 
 #: models/auth.py:291
 msgid "Apply to a specific type"
@@ -2142,8 +2142,8 @@ msgid ""
 "Cannot delete some instances of model «{model}» because they are referenced "
 "through a protected foreign key: «{related} - {field}»"
 msgstr ""
-"Certaines instances du modèle «{model}» ne peuvent être suprrimées car elles "
-"sont utiliséesvia une clé étrangère protégée : «{related} - {field}»"
+"Certaines instances du modèle «{model}» ne peuvent être supprimées car elles "
+"sont utilisées via une clé étrangère protégée : «{related} - {field}»"
 
 #: models/entity.py:64 models/relation.py:389
 msgid "Creation date"
