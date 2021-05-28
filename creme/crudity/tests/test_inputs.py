@@ -731,7 +731,12 @@ description3=[[<br>]]
 
 @skipIfCustomContact
 class InfopathInputEmailTestCase(InputsBaseTestCase):
-    def _build_attachment(self, filename='', content_type='application/x-microsoft-infopathform', content=b''):
+    def _build_attachment(
+            self,
+            # filename='',
+            filename='Attached.xsn',
+            content_type='application/x-microsoft-infopathform',
+            content=b''):
         return filename, SimpleUploadedFile(filename, content, content_type=content_type)
 
     def _get_infopath_input(self, backend, **backend_cfg):
