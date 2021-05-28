@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Billing 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-18 17:56+0200\n"
+"POT-Creation-Date: 2021-05-39 17:39+0200\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -279,7 +279,7 @@ msgstr "Choix du ou des produits"
 #: forms/line.py:89
 msgid "Optional global information applied to your selected products"
 msgstr ""
-"Informations complémentaires appliquables à votre sélection de produits"
+"Informations complémentaires applicables à votre sélection de produits"
 
 #: forms/line.py:97 templates/billing/bricks/service-lines.html:7
 msgid "Services"
@@ -292,7 +292,7 @@ msgstr "Choix du ou des services"
 #: forms/line.py:101
 msgid "Optional global information applied to your selected services"
 msgstr ""
-"Informations complémentaires appliquables à votre sélection de services"
+"Informations complémentaires applicables à votre sélection de services"
 
 #: forms/line.py:140
 #, python-brace-format

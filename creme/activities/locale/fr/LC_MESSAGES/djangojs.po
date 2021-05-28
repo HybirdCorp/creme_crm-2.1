@@ -1,5 +1,5 @@
 # FR LOCALISATION OF 'ACTIVITIES' APP (JavaScript only)
-# Copyright (C) 2019 Hybird
+# Copyright (C) 2021 Hybird
 # This file is distributed under the same license as the Creme package.
 #
 # > django-admin.py makemessages -d djangojs -l fr
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Activities 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 14:11+0100\n"
+"POT-Creation-Date: 2021-05-28 17:36+0200\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -111,7 +111,7 @@ msgid "Tuesday"
 msgstr "Mardi"
 
 #: static/activities/js/activities.js:277
-msgid "Wesnesday"
+msgid "Wednesday"
 msgstr "Mercredi"
 
 #: static/activities/js/activities.js:278

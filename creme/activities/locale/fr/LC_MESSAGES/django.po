@@ -1224,7 +1224,7 @@ msgstr "Changer le calendrier de «{object}»"
 #~ msgid "Tuesday"
 #~ msgstr "Mardi"
 
-#~ msgid "Wesnesday"
+#~ msgid "Wednesday"
 #~ msgstr "Mercredi"
 
 #~ msgid "Thursday"

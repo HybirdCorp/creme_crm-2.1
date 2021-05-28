@@ -1,5 +1,5 @@
 # FR LOCALISATION OF 'REPORTS' APP
-# Copyright (C) 2019 Hybird
+# Copyright (C) 2021 Hybird
 # This file is distributed under the same license as the Creme package.
 #
 # > django-admin.py makemessages -l fr -i "tests/*"
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Creme Reports 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 15:10+0100\n"
+"POT-Creation-Date: 2021-05-28 17:43+0200\n"
 "Last-Translator: Hybird <contact@hybird.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -377,7 +377,7 @@ msgid ""
 "If you chose a Date field, and select «customized» you have to specify a "
 "start date and/or an end date."
 msgstr ""
-"Si vous choisisser un Champ date et sélectionnez «Personnalisé» vous devez "
+"Si vous choisissez un Champ date et sélectionnez «Personnalisé» vous devez "
 "spécifier une date de début et/ou une date de fin."
 
 #: forms/report.py:347

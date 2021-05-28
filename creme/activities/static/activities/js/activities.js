@@ -1,6 +1,6 @@
 /*******************************************************************************
     Creme is a free/open-source Customer Relationship Management software
-    Copyright (C) 2009-2019  Hybird
+    Copyright (C) 2009-2021  Hybird
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -274,7 +274,7 @@ creme.activities.calendar.fullCalendar = function(events_url, creation_url, upda
             gettext("Sunday"),
             gettext("Monday"),
             gettext("Tuesday"),
-            gettext("Wesnesday"),
+            gettext("Wednesday"),
             gettext("Thursday"),
             gettext("Friday"),
             gettext("Saturday")
