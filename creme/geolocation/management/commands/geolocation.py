@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2015-2018  Hybird
+#    Copyright (C) 2015-2021  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -285,8 +285,8 @@ class Command(BaseCommand):
             self.sysout(url, verbosity > 1)
             self.import_town_database(url, defaults)
 
-    def print_stats(self):
-        self.sysout('{} town(s) in database.'.format(Town.objects.count()))
+    def print_stats(self, verbosity=0):
+        self.sysout('{} town(s) in database.'.format(Town.objects.count()), verbosity > 0)
 
     def handle(self, *args, **options):
         populate = options.get('populate')
@@ -295,7 +295,7 @@ class Command(BaseCommand):
         verbosity = options.get('verbosity')
 
         if stats:
-            self.print_stats()
+            self.print_stats(verbosity)
 
         if imports:
             self.import_town_all(verbosity)
