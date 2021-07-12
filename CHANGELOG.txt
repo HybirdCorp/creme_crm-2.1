@@ -3,6 +3,8 @@
   Users side :
   ------------
     # Apps :
+        * Assistants :
+            - In forms, the field "user" is the first field (again).
         * Geolocation :
             - There was a crash with the option "--stat" of the command "geolocation".
 
