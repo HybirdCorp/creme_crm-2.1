@@ -2,7 +2,7 @@
 
 ################################################################################
 #    Creme is a free/open-source Customer Relationship Management software
-#    Copyright (C) 2009-2019  Hybird
+#    Copyright (C) 2009-2021  Hybird
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -33,13 +33,13 @@ class ToDoManager(models.Manager):
 
 
 class ToDo(CremeModel):
+    user          = creme_fields.CremeUserForeignKey(verbose_name=_('Owner user'))
     title         = models.CharField(_('Title'), max_length=200)
     is_ok         = models.BooleanField(_('Done ?'), editable=False, default=False)
     reminded      = models.BooleanField(_('Notification sent'), editable=False, default=False)  # Needed by creme_core.core.reminder
     description   = models.TextField(_('Description'), blank=True)
     creation_date = creme_fields.CreationDateTimeField(_('Creation date'), editable=False)
     deadline      = models.DateTimeField(_('Deadline'), blank=True, null=True)
-    user          = creme_fields.CremeUserForeignKey(verbose_name=_('Owner user'))
 
     entity_content_type = creme_fields.EntityCTypeForeignKey(related_name='+', editable=False)
     entity              = models.ForeignKey(CremeEntity,  related_name='assistants_todos',
