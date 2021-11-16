@@ -8,6 +8,7 @@ from unittest import skipIf
 from unittest.util import safe_repr
 import warnings
 
+from bleach._vendor import html5lib
 from django.apps import apps
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -585,6 +586,17 @@ class _CremeTestCase:
         return json_dump({'ctype': str(ctype.id if ctype else 0),
                           'efilter': efilter.id if efilter else '',
                          })
+
+    def get_html_tree(self, content):
+        return html5lib.parse(content, namespaceHTMLElements=False)
+
+    def get_html_node_or_fail(self, parent_node, path):
+        child = parent_node.find(path)
+
+        if child is None:
+            self.fail(f'The HTML node with path <{path}> has not been found.')
+
+        return child
 
     @staticmethod
     def http_file(file_path):
