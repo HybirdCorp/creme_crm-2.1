@@ -1,5 +1,11 @@
 == Version 2.1.17 Work in progress (not released -- this is a draft) ==
 
+  Users side :
+  ------------
+    # Apps :
+        * Polls :
+            - A crash in the stats page has been fixed.
+
 
 == Version 2.1.16 ==
 
