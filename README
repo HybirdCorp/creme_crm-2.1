@@ -1,3 +1,7 @@
+WARNING :
+The "2.1" series is not supported anymore.
+You should upgrade to "2.2": https://github.com/HybirdCorp/creme_crm
+
 Creme is a free/open-source Customer Relationship Management software developed by Hybird (www.hybird.org).
 
 It is designed with an entities/relationships architecture, and is highly configurable, which allows

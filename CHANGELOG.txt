@@ -1,5 +1,7 @@
 == Version 2.1.17 ==
 
+  NOTE : This is the last release of the "2.1" series ; you should upgrade to "2.2".
+
   Users side :
   ------------
     # The button to delete a view of list was broken.
