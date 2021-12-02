@@ -2,6 +2,7 @@
 
   Users side :
   ------------
+    # The button to delete a view of list was broken.
     # Apps :
         * Polls :
             - A crash in the stats page has been fixed.
